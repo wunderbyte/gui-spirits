@@ -8,7 +8,7 @@
     "prettier:js": "prettier --write '{edb,gui}/*/src/**/*.{js,mjs}' --ignore-path .prettierignore",
     "prettier:json": "prettier --write '{edb,gui}/*/package.json' 'package.json'",
     "export": "npm run build && npm run export:copy",
-    "export:copy": "cp dist/index.js ../websites-monorepo/deps/gui/index.js && cp dist/index.js.map ../websites-monorepo/deps/gui/index.js.map",
+    "export:copy": "cp dist/index.js ../websites-monorepo/deps/gui-spirits/index.js && cp dist/index.js.map ../websites-monorepo/deps/gui-spirits/index.js.map",
     "clean": "npm run clean:lerna && npm run clean:npm",
     "clean:lerna": "lerna clean",
     "clean:npm": "npm run clean:npm:unlock && npm run clean:npm:uninstall",
