@@ -1,0 +1,10 @@
+{
+  "name": "@gui/plugins",
+  "version": "0.0.0",
+  "module": "src/index.js",
+  "dependencies": {
+    "@utils/callback-utils": "0.0.0",
+    "@utils/object-utils": "0.0.0",
+    "@utils/data-utils": "0.0.0"
+  }
+}
