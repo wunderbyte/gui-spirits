@@ -1,5 +1,5 @@
-const exist = set => !!set;
-const clear = set => set.clear();
+const exist = (set) => !!set;
+const clear = (set) => set.clear();
 
 /**
  * Add callback to set and return function to delete from set.
@@ -18,12 +18,12 @@ export function addCallback(cb, set) {
  * @param {...*} args
  */
 export function runCallbacks(set, ...args) {
-	set && set.forEach(cb => cb(...args));
+	set && set.forEach((cb) => cb(...args));
 }
 
 /**
  * Clear set(s) of callbacks.
- * @param  {...Set} sets 
+ * @param  {...Set} sets
  */
 export function nonCallbacks(...sets) {
 	sets.filter(exist).forEach(clear);

@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "module": "dist/index.js",
   "scripts": {
-    "build": "lerna bootstrap && rollup --config --input gui/spirits/src/index.js --file dist/index.js",
+    "build": "lerna bootstrap && rollup --config --input spirits/src/index.js --file dist/index.js",
     "prettier": "npm run prettier:js && npm run prettier:json",
-    "prettier:js": "prettier --write '{edb,gui}/*/src/**/*.{js,mjs}' --ignore-path .prettierignore",
-    "prettier:json": "prettier --write '{edb,gui}/*/package.json' 'package.json'",
+    "prettier:js": "prettier --write '{spirits,plugins,utils}/**/*.{js,mjs}' --ignore-path .prettierignore",
+    "prettier:json": "prettier --write '{spirits,plugins,utils}/*/package.json' 'package.json'",
     "export": "npm run build && npm run export:copy",
     "export:copy": "cp dist/index.js ../websites-monorepo/deps/gui-spirits/index.js && cp dist/index.js.map ../websites-monorepo/deps/gui-spirits/index.js.map",
     "clean": "npm run clean:lerna && npm run clean:npm",
