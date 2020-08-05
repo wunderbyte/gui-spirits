@@ -18,42 +18,51 @@ export function AttPlugin(elm) {
 		},
 
 		/**
-		 * Get attribute value cast to an inferred type.
-		 * @param {string} name
+		 * Get attribute value(s) cast to an inferred type.
+		 * @param {string|Array<string>} name
 		 * @param {string|null} backup Returns this if no attribute found
 		 * @returns {string|number|boolean|null|undefined}
 		 */
 		get(name, backup = null) {
-			return cast(elm.getAttribute(name) ?? backup);
+			return Array.isArray(name)
+				? name.map(plugin.get)
+				: cast(elm.getAttribute(name) ?? backup);
 		},
 
 		/**
-		 * Set attribute.
-		 * @param {string} name
+		 * Set attribute(s).
+		 * @param {string|Array<string>} name
 		 * @param {string|number|boolean} value
 		 * @returns {this}
 		 */
 		set(name, value) {
-			elm.setAttribute(name, String(value));
+			Array.isArray(name)
+				? name.forEeach(plugin.set)
+				: elm.setAttribute(name, String(value));
 			return plugin;
 		},
 
 		/**
-		 * Has attribute?
-		 * @param {string} name
+		 * Has attribute(s)?
+		 * @param {string|Array<string>} name
 		 * @returns {boolean}
 		 */
 		has(name) {
-			return elm.hasAttribute(name);
+			return Array.isArray(name)
+				? name.every(plugin.has)
+				: elm.hasAttribute(name);
 		},
 
 		/**
-		 * Remove attribute (sticking to the semantics of a {Map} here).
+		 * Delete attribute(s). Not named `remove` since 
+		 * we stick to the terminology of a {Map} here.
 		 * @param {string} name
 		 * @returns {this}
 		 */
 		delete(name) {
-			elm.removeAttribute(name);
+			Array.isArray(name)
+				? name.forEach(plugin.delete) 
+				: elm.removeAttribute(name);
 			return plugin;
 		},
 
