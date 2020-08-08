@@ -174,14 +174,13 @@ export function common(context, plugin) {
 		},
 
 		/**
-		 * @deprecated
 		 * Get or set HTML.
 		 * TODO: Implement with unsafeHTML to preserve styles in Shadow DOM!
 		 * @param {string} markup
 		 * @returns {this}
 		 */
 		html(markup) {
-			console.log('deprecated: DOMPlugin.html');
+			console.log('TODO: action required');
 			if (arguments.length) {
 				context.innerHTML = markup;
 				return plugin;
