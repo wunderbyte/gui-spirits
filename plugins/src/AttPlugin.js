@@ -20,7 +20,7 @@ export function AttPlugin(elm) {
 		/**
 		 * Get attribute value(s) cast to an inferred type.
 		 * @param {string|Array<string>} name
-		 * @param {string|null} backup Returns this if no attribute found
+		 * @param {string|null} backup Returns this value if no attribute found
 		 * @returns {string|number|boolean|null|undefined}
 		 */
 		get(name, backup = null) {
@@ -54,14 +54,14 @@ export function AttPlugin(elm) {
 		},
 
 		/**
-		 * Delete attribute(s). Not named `remove` since 
+		 * Delete attribute(s). Not named `remove` since
 		 * we stick to the terminology of a {Map} here.
 		 * @param {string} name
 		 * @returns {this}
 		 */
 		delete(name) {
 			Array.isArray(name)
-				? name.forEach(plugin.delete) 
+				? name.forEach(plugin.delete)
 				: elm.removeAttribute(name);
 			return plugin;
 		},

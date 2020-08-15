@@ -6,7 +6,7 @@
 export function JSONPlugin(elm) {
 	return {
 		/**
-		 * Parse JSON to object or array. Note that is must be valid JSON for now.
+		 * Parse JSON to object or array. Note that is must be valid JSON (for now).
 		 * @param {string} selector Used to locate the script
 		 * @param {Node|Document} [context] Where to locate the script
 		 * @returns {Object|Array}

@@ -2,6 +2,7 @@ export { AttPlugin } from './AttPlugin';
 export { BoxPlugin } from './BoxPlugin';
 export { CSSPlugin } from './CSSPlugin';
 export { JSONPlugin } from './JSONPlugin';
+export { ActionPlugin } from './ActionPlugin';
 export { EventPlugin } from './EventPlugin';
 export { ShadowPlugin } from './ShadowPlugin';
 export { SimpleStatePlugin } from './SimpleStatePlugin';

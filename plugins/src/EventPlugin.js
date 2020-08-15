@@ -103,7 +103,7 @@ export function EventPlugin(elm) {
  * @param {string|Array<string>} types
  * @param {Function} action
  */
-export function each(types, action) {
+function each(types, action) {
 	[].concat(types.split ? types.split(' ') : types).forEach(action);
 }
 
