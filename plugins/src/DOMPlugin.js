@@ -40,7 +40,7 @@ export function onpostrender(cb) {
 
 /**
  * Working with both light and Shadow DOM.
- * @param {HTMLElement|ShadowRoot} context
+ * @param {SpiritElement|ShadowRoot} context
  * @param {Object} plugin
  * @returns {Object}
  */

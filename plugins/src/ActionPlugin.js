@@ -26,54 +26,143 @@ const consumed = new WeakSet();
 const [ASCEND, DESCEND, BROADCAST] = [0, 1, 2];
 
 /**
- * TODO: Object.freeze this in devmode except for `consumed` somehow :/
+ * Action.
  */
 class Action {
-	constructor(target, type, value) {
+	/**
+	 * Support recursive destructuring.
+	 * @type {Action}
+	 */
+	action = this;
+
+	/**
+	 * Although conventionally named target,
+	 * this property pins the action source.
+	 * @type {SpiritElement}
+	 */
+	target = null;
+
+	/**
+	 * Action type.
+	 * @type {string}
+	 */
+	type = null;
+
+	/**
+	 * Optional action data.
+	 * @type {?}
+	 */
+	data = null;
+
+	/**
+	 * Initialize that action.
+	 * @param {SpiritElement} target
+	 * @param {string} type
+	 * @param {?} data
+	 */
+	constructor(target, type, data) {
 		Object.assign(this, {
 			action: this,
 			target,
 			type,
-			value,
+			data,
 		});
 	}
+
+	/**
+	 * Consume the dispatched action to prevent further processing.
+	 * @returns {Action}
+	 */
 	consume() {
 		consumed.add(this);
+		return this;
 	}
 }
 
 /**
  * Working with attributes.
- * @param {HTMLElement} elm
+ * @param {SpiritElement} elm
  * @returns {AttPlugin}
  */
 export function ActionPlugin(elm, prod) {
 	const map = new MapSet();
-	const run = (dir, type, value) => dispatch(dir, elm, type, value, prod);
+	const run = (dir, type, data) => dispatch(dir, elm, type, data, prod);
 	const plugin = {
+		/**
+		 * Add action listener(s).
+		 * @param {string|Array<string>} types
+		 * @param {Function} cb
+		 * @returns {this}
+		 */
 		on(types, cb) {
 			each(types, (type) => map.add(type, cb));
 			elm[onaction] ??= testaction(map);
-			specials(prod);
 			return plugin;
 		},
+
+		/**
+		 * Remove action listener(s).
+		 * @param {string|Array<string>} types
+		 * @param {Function} cb
+		 * @returns {this}
+		 */
 		off(types, cb) {
 			each(types, (type) => map.del(type, cb));
 			map.size === 0 && delete elm[onaction];
 			return plugin;
 		},
-		ascend(type, value) {
-			run(ASCEND, type, value);
+
+		/**
+		 * Add auto-removing action listeners(s)
+		 * @param {string|Array<string>} types
+		 * @param {*} cb
+		 */
+		once(types, cb) {
+			each(types, (type) => {
+				plugin.on(type, function once(action) {
+					plugin.off(type, once);
+					cb(action);
+				});
+			});
 			return plugin;
 		},
-		descend(type, value) {
-			run(DESCEND, type, value);
+
+		/**
+		 * Dispatch action ascending.
+		 * @param {string} type
+		 * @param {?} [data]
+		 * @returns {this}
+		 */
+		ascend(type, data = null) {
+			run(ASCEND, type, data);
 			return plugin;
 		},
-		broadcast(type, value) {
-			run(BROADCAST, type, value);
+
+		/**
+		 * Dispatch action descending.
+		 * @param {string} type
+		 * @param {?} [data]
+		 * @returns {this}
+		 */
+		descend(type, data = null) {
+			run(DESCEND, type, data);
 			return plugin;
 		},
+
+		/**
+		 * Dispatch action globally.
+		 * @param {string} type
+		 * @param {?} [data]
+		 * @returns {this}
+		 */
+		broadcast(type, data = null) {
+			run(BROADCAST, type, data);
+			return plugin;
+		},
+
+		/**
+		 * Cleanup.
+		 */
 		onexorcise() {
 			delete elm[onaction];
 			allworld.delete(elm);
@@ -103,10 +192,10 @@ function each(types, action) {
  * @param {string} dir
  * @param {HTMLElement} elm
  * @param {string} type
- * @param {?} value
+ * @param {?} data
  */
-function dispatch(dir, elm, type, value, prod) {
-	const action = freeze(new Action(elm, type, value), prod);
+function dispatch(dir, elm, type, data, prod) {
+	const action = freeze(new Action(elm, type, data), prod);
 	dir === BROADCAST
 		? broadcast(elm, action)
 		: dir === ASCEND
@@ -116,7 +205,7 @@ function dispatch(dir, elm, type, value, prod) {
 
 /**
  * Freeze the thing in devmode. Note that this
- * will not freeze the action value (payload).
+ * will not freeze the action data (payload).
  * @param {Action} action
  * @param {boolean} prod
  * @returns {Action}
@@ -160,7 +249,7 @@ function descend(elm, action) {
 /**
  * Check for secret method and run it to potentially match
  * the {Action} with the element (see function `testaction`).
- * @param {HTMLElement} elm
+ * @param {SpiritElement} elm
  * @param {Action} action
  */
 function tryaction(elm, action) {
@@ -189,37 +278,4 @@ function runaction(action, cbs) {
 		cb(action);
 		return !consumed.has(action);
 	});
-}
-
-// HTML specials ...............................................................
-
-/**
- * @param {boolean} prod
- */
-function specials(prod) {
-	if (!specials.setup) {
-		document.addEventListener('click', (e) => special(e.target, prod));
-		specials.setup = true;
-	}
-}
-
-/**=
- * @param {HTMLElement} elm
- * @param {boolean} prod
- */
-function special(elm, prod) {
-	elm
-		? elm.dataset.action
-			? trigger(elm, prod)
-			: special(elm.parentElement, prod)
-		: void false;
-}
-
-/**
- * @param {HTMLElement} elm
- * @param {boolean} prod
- * @param {DOMStringMap} dataset
- */
-function trigger(elm, prod, { action, value } = elm.dataset) {
-	dispatch(ASCEND, elm, action, value ?? elm.value, prod);
 }

@@ -3,7 +3,7 @@ import { MapSet } from '@utils/data-utils';
 
 /**
  * Working with attributes.
- * @param {HTMLElement} elm
+ * @param {SpiritElement} elm
  * @returns {AttPlugin}
  */
 export function AttPlugin(elm) {
@@ -94,6 +94,7 @@ export function AttPlugin(elm) {
 		},
 
 		/**
+		 * Resolve element attributes via this API.
 		 * @param {HTMLElement} newelm
 		 * @returns {AttPlugin}
 		 */

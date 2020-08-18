@@ -63,6 +63,24 @@ export function EventPlugin(elm) {
 		},
 
 		/**
+		 * Conveniently shortcut click handler on the {SpiritElement}.
+		 * @param {Function|SpiritElement} handler
+		 * @param {boolean} [capture]
+		 */
+		onclick(handler = elm, capture = false) {
+			return plugin.on('click', elm, handler, capture);
+		},
+
+		/**
+		 * Conveniently unregister shortcut click handler.
+		 * @param {Function|SpiritElement} handler
+		 * @param {boolean} [capture]
+		 */
+		offclick(handler = elm, capture = false) {
+			return plugin.off('click', elm, handler, capture);
+		},
+
+		/**
 		 * Dispatch `customEvent` with optional `detail`.
 		 * @param {string} type
 		 * @param {*} [detail]
