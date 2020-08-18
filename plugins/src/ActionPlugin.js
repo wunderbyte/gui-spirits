@@ -264,7 +264,7 @@ function tryaction(elm, action) {
  * @returns {Function}
  */
 function testaction(map) {
-	return (action) =>
+	return ({ type, action }) =>
 		map.has(type) && runaction(action, Array.from(map.get(type)));
 }
 
