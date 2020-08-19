@@ -1,89 +1,11 @@
 import { MapSet } from '@utils/data-utils';
+import { Command } from './Command';
 
 /**
  * Stamp the secret method.
  * @type {Symbol}
  */
 const oncommand = Symbol('oncommand');
-
-/**
- * Tracking the DOM event so we can `preventDefault` it.
- * @type {Symbol}
- */
-const realevent = Symbol('realevent');
-
-/**
- * Tracking consumed Commands (not as a property on
- * the Command since we'll freeze that in devmode).
- * @type {WeakSet<Action>}
- */
-const consumed = new WeakSet();
-
-/**
- * Action.
- */
-class Command {
-	/**
-	 * Support recursive destructuring.
-	 * @type {Action}
-	 */
-	command = this;
-
-	/**
-	 * Although conventionally named target,
-	 * this property pins the command source.
-	 * @type {SpiritElement}
-	 */
-	target = null;
-
-	/**
-	 * Action type.
-	 * @type {string}
-	 */
-	type = null;
-
-	/**
-	 * Optional command value.
-	 * @type {?}
-	 */
-	value = null;
-
-	/**
-	 * The {ClickEvent} or whatever in case we'd 
-	 * like to `preventDefault` it or something.
-	 * @type {Event}
-	 */
-	[realevent] = null;
-
-	/**
-	 * Initialize that command.
-	 * @param {HTMLElement} target
-	 * @param {Event} e
-	 * @param {DOMStringMap} data
-	 */
-	constructor(elm, e, data = elm.dataset) {
-		Object.assign(this, {
-			value: cast(data.value ?? elm.value ?? null),
-			name: elm.name ?? null,
-			type: data.command,
-			target: elm,
-			[realevent]: e
-		});
-	}
-
-	/**
-	 * Consume the dispatched command to prevent further processing.
-	 * This will also block and inhibit the internally set DOM event.
-	 * TODO: How to handle the event in case this was deferred a tick.
-	 * @returns {Command}
-	 */
-	consume() {
-		this[realevent].stopPropagation();
-		this[realevent].preventDefault();
-		consumed.add(this);
-		return this;
-	}
-}
 
 /**
  * Working with attributes.
@@ -195,14 +117,14 @@ function testcommand(map) {
 }
 
 /**
- * Run callbacks for Action.
- * @param {Action} command
+ * Run callbacks for Command.
+ * @param {Command} command
  * @param {Array<Function>} cbs
  */
 function runcommand(command, cbs) {
 	cbs.every((cb) => {
 		cb(command);
-		return !consumed.has(command);
+		return !command.consumed;
 	});
 }
 
@@ -246,9 +168,9 @@ function trigger(e, elm, prod) {
 }
 
 /**
- * Dispatch {Command} upwards
+ * Dispatch {Command} upwards.
  * @param {HTMLElement} elm
- * @param {Action} action
+ * @param {Command} command
  */
 function ascend(elm, command) {
 	elm && trycommand(elm, command);
@@ -259,18 +181,18 @@ function ascend(elm, command) {
  * Check for secret method and run it to potentially match
  * the {Command} with the element (see function `testcommand`).
  * @param {SpiritElement} elm
- * @param {Action} command
+ * @param {Command} command
  */
 function trycommand(elm, command) {
-	!consumed.has(command) && elm[oncommand] && elm[oncommand](command);
+	!command.consumed && elm[oncommand] && elm[oncommand](command);
 }
 
 /**
  * Freeze the thing in devmode. Note that this
  * will not freeze the command value (payload).
- * @param {Action} command
+ * @param {Command} command
  * @param {boolean} prod
- * @returns {Action}
+ * @returns {Command}
  */
 function freeze(command, prod) {
 	return prod ? command : Object.freeze(command);

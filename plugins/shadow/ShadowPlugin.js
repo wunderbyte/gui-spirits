@@ -1,5 +1,5 @@
 import { html } from 'lit-html';
-import { common, render } from './DOMPlugin';
+import { common, render } from '../dom/DOMPlugin';
 
 /**
  * Working with the Shadow DOM.

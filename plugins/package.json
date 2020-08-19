@@ -1,7 +1,7 @@
 {
   "name": "@gui/plugins",
   "version": "0.0.0",
-  "module": "src/index.js",
+  "module": "index.js",
   "dependencies": {
     "@utils/callback-utils": "0.0.0",
     "@utils/object-utils": "0.0.0",
