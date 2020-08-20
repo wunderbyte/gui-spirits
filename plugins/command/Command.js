@@ -14,7 +14,7 @@ const event = Symbol('event');
 /**
  * Command.
  */
-class Command {
+export class Command {
 	/**
 	 * Support recursive destructuring.
 	 * @type {Command}
