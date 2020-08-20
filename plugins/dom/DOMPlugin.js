@@ -3,6 +3,31 @@ import { render as litrender } from 'lit-html';
 
 let [set1, set2] = [new Set(), new Set()];
 
+/* TODO: QUERY METHODS TO IMPLEMENT!
+	parent(type); // parent element or spirit of type
+	child(type); // first child element (or spirit)
+	children(type); // all children
+	ancestor(type); // first ancestor
+	ancestors(type); // all ancestors
+	descendant(type); // first descendant
+	descendants(type); // all descendants
+	next(type); // next sibiling (of type)
+	previous(type); // previous sibling
+	following(type); // all following siblings
+	preceding(type); // all preceding siblings
+	first(type); // first child (or spirit of type)
+	last(type); // last child (or spirit of type)
+*/
+
+/*
+	TODO: MUTATION METHODS TO IMPLEMENT
+	append(things); // append element(s) or spirit(s)
+	prepend(things); // prepend thing(s)
+	before(things); // insert thing(s) before
+	after(things); // insert things(s) after
+	replace(things); // replace with thing(s)
+*/
+
 /**
  * Working with the light DOM.
  * @param {SpiritElement} context

@@ -9,7 +9,7 @@ const consumed = new WeakSet();
  * Tracking the DOM event so we can `preventDefault` it.
  * @type {Symbol}
  */
-const realevent = Symbol('realevent');
+const event = Symbol('event');
 
 /**
  * Command.
@@ -45,7 +45,7 @@ class Command {
 	 * like to `preventDefault` it or something.
 	 * @type {Event}
 	 */
-	[realevent] = null;
+	[event] = null;
 
 	/**
 	 * Initialize that command.
@@ -59,7 +59,7 @@ class Command {
 			name: elm.name ?? null,
 			type: data.command,
 			target: elm,
-			[realevent]: e
+			[event]: e
 		});
 	}
 
@@ -70,10 +70,10 @@ class Command {
 	 */
 	consume() {
 		try {
-			this[realevent].stopPropagation();
-			this[realevent].preventDefault();
+			this[event].stopPropagation();
+			this[event].preventDefault();
 		} catch {
-			// TODO: confirmd that we'd need this try catch if deferred timeout
+			// TODO: confirm that we'd need this try catch if deferred (timeout)
 		}
 		consumed.add(this);
 		return this;

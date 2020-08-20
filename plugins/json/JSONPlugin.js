@@ -1,5 +1,6 @@
 /**
  * Working with JSON from embedded `<script type="application/json">`
+ * TODO: Support invalid JSON (with some simple hand-coded JS syntax) 
  * @param {SpiritElement} elm
  * @returns {CSSPlugin}
  */
@@ -22,7 +23,7 @@ export function JSONPlugin(elm) {
 		},
 
 		/**
-		 * Get JSON text as string.
+		 * Get JSON text as string (eg. for processing in Worker).
 		 * @param {string} selector Used to locate the script
 		 * @param {Node|Document} [context] Where to locate the script
 		 * @returns {string}

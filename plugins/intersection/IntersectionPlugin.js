@@ -1,10 +1,14 @@
 /**
  * Observe element for intersection with scrolling ancestor boundaries.
+ * Supports limited configurability for ease of use, consider using some
+ * out of the box {IntersectionObserver} for advanced visibility tracking.
+ * TODO: Either deprecate the threshold argument OR make sure to cleanup!
  * @param {HTMLElement|ShadowRoot} elm
  * @returns {IntersectionPlugin}
  */
 export function IntersectionPlugin(elm) {
 	/**
+	 * Register intersection callback. Returns a function to unregister.
 	 * @param {Function} cb
 	 * @param {WeakMap} map
 	 * @returns {Function}
@@ -16,10 +20,10 @@ export function IntersectionPlugin(elm) {
 	}
 
 	/**
+	 * Unregister intersection callback.
 	 * @param {Function} cb
 	 * @param {WeakMap} map
 	 * @param {Set<Function>} [set]
-	 * @returns {Function}
 	 */
 	function del(cb, threshold, map, set = map.get(elm)) {
 		set.delete(cb);
@@ -30,10 +34,25 @@ export function IntersectionPlugin(elm) {
 	}
 
 	return {
+
+		/**
+		 * Run callback whenever visible.
+		 * Returns function to stop this.
+		 * @param {Function} cb 
+		 * @param {number} [th] 
+		 * @returns {Function}
+		 */
 		onvisible(cb, th = 0) {
 			return add(cb, th, onvisibles);
 		},
 
+		/**
+		 * Run callback only once when visible.
+		 * Returns function to forget about it.
+		 * @param {Function} cb 
+		 * @param {number} [th]
+		 * @returns {Function} 
+		 */
 		oncevisible(cb, th = 0) {
 			return this.onvisible(function wrap() {
 				del(wrap, th, onvisibles);
@@ -41,10 +60,24 @@ export function IntersectionPlugin(elm) {
 			}, th);
 		},
 
+		/**
+		 * Run callback whenever not visible.
+		 * Returns function to abandon this.
+		 * @param {Function} cb 
+		 * @param {number} [th]
+		 * @returns {Function} 
+		 */
 		oninvisible(cb, th = 0) {
 			return add(cb, th, oninvisibles);
 		},
 
+		/**
+		 * Run callback only once when hidden.
+		 * Returns function to forget about it.
+		 * @param {Function} cb 
+		 * @param {number} [th]
+		 * @returns {Function} 
+		 */
 		onceinvisible(cb, th = 0) {
 			return this.oninvisible(function wrap() {
 				del(wrap, th, oninvisibles);

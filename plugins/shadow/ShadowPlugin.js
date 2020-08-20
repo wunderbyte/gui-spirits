@@ -3,6 +3,7 @@ import { common, render } from '../dom/DOMPlugin';
 
 /**
  * Working with the Shadow DOM.
+ * Borrows from the normal DOM.
  * @param {SpiritElement} elm
  * @param {undefined} [plugin]
  * @returns {ShadowPlugin}
