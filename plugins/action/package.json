@@ -1,0 +1,8 @@
+{
+  "name": "@gui/plugin-action",
+  "version": "0.0.0",
+  "module": "ActionPlugin.js",
+  "dependencies": {
+    "@gui/data-utils": "0.0.0"
+  }
+}

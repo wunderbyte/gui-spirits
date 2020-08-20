@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "module": "src/index.js",
   "dependencies": {
-    "@utils/callback-utils": "0.0.0",
-    "@gui/plugins": "0.0.0"
+    "@gui/callback-utils": "0.0.0"
   }
 }

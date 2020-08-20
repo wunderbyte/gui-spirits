@@ -1,4 +1,4 @@
-import { addCallback, runCallbacks, nonCallbacks } from '@utils/callback-utils';
+import { addCallback, runCallbacks, nonCallbacks } from '@gui/callback-utils';
 import { plugin, unplug } from './SpiritPlugins';
 import { frozen } from './SpiritUtils';
 

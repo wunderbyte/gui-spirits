@@ -1,4 +1,4 @@
-import { MapSet } from '@utils/data-utils';
+import { MapSet } from '@gui/data-utils';
 import { Action } from './Action';
 
 /**

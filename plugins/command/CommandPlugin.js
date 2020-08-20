@@ -1,4 +1,4 @@
-import { MapSet } from '@utils/data-utils';
+import { MapSet } from '@gui/data-utils';
 import { Command } from './Command';
 
 /**
@@ -76,32 +76,6 @@ export function CommandPlugin(elm, prod) {
  */
 function each(types, command) {
 	[].concat(types.split ? types.split(' ') : types).forEach(command);
-}
-
-/**
- * Autocast value to an inferred type. '123' will
- * return a number, `false` will return a boolean.
- * TODO: Cast objects, arrays and JSON-looking data.
- * @param {string|number|boolean|null|undefined} string
- * @returns {string|number|boolean}
- */
-export function cast(value) {
-	const s = String(value).trim();
-	switch (s) {
-		case 'null':
-			return null;
-		case 'undefined':
-			return undefined;
-		case 'true':
-		case 'false':
-			return s === 'true';
-		default:
-			return String(parseInt(s, 10)) === s
-				? parseInt(s, 10)
-				: String(parseFloat(s)) === s
-				? parseFloat(s)
-				: String(value);
-	}
 }
 
 // Evaluating ..................................................................

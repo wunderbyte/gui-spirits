@@ -1,0 +1,5 @@
+{
+  "name": "@gui/plugin-json",
+  "version": "0.0.0",
+  "module": "JSONPlugin.js"
+}

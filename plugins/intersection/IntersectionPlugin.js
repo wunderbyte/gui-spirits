@@ -34,12 +34,11 @@ export function IntersectionPlugin(elm) {
 	}
 
 	return {
-
 		/**
 		 * Run callback whenever visible.
 		 * Returns function to stop this.
-		 * @param {Function} cb 
-		 * @param {number} [th] 
+		 * @param {Function} cb
+		 * @param {number} [th]
 		 * @returns {Function}
 		 */
 		onvisible(cb, th = 0) {
@@ -49,9 +48,9 @@ export function IntersectionPlugin(elm) {
 		/**
 		 * Run callback only once when visible.
 		 * Returns function to forget about it.
-		 * @param {Function} cb 
+		 * @param {Function} cb
 		 * @param {number} [th]
-		 * @returns {Function} 
+		 * @returns {Function}
 		 */
 		oncevisible(cb, th = 0) {
 			return this.onvisible(function wrap() {
@@ -63,9 +62,9 @@ export function IntersectionPlugin(elm) {
 		/**
 		 * Run callback whenever not visible.
 		 * Returns function to abandon this.
-		 * @param {Function} cb 
+		 * @param {Function} cb
 		 * @param {number} [th]
-		 * @returns {Function} 
+		 * @returns {Function}
 		 */
 		oninvisible(cb, th = 0) {
 			return add(cb, th, oninvisibles);
@@ -74,9 +73,9 @@ export function IntersectionPlugin(elm) {
 		/**
 		 * Run callback only once when hidden.
 		 * Returns function to forget about it.
-		 * @param {Function} cb 
+		 * @param {Function} cb
 		 * @param {number} [th]
-		 * @returns {Function} 
+		 * @returns {Function}
 		 */
 		onceinvisible(cb, th = 0) {
 			return this.oninvisible(function wrap() {

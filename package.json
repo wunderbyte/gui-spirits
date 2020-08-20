@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "module": "dist/index.js",
   "scripts": {
+    "boot": "lerna bootstrap",
     "build": "lerna bootstrap && rollup --config --input spirits/src/index.js --file dist/index.js",
     "prettier": "npm run prettier:js && npm run prettier:json",
     "prettier:js": "prettier --write '{spirits,plugins,utils}/**/*.{js,mjs}' --ignore-path .prettierignore",
     "prettier:json": "prettier --write '{spirits,plugins,utils}/*/package.json' 'package.json'",
-    "export": "npm run build && npm run export:copy",
-    "export:copy": "cp dist/index.js ../websites-monorepo/deps/gui-spirits/index.js && cp dist/index.js.map ../websites-monorepo/deps/gui-spirits/index.js.map",
     "clean": "npm run clean:lerna && npm run clean:npm",
     "clean:lerna": "lerna clean",
     "clean:npm": "npm run clean:npm:unlock && npm run clean:npm:uninstall",
     "clean:npm:unlock": "find . -name \"package-lock.json\" -not -path \"./node_modules/*\" -delete && echo \"package-lock.json files removed!\"",
-    "clean:npm:uninstall": "rm -rf `find -type d -name node_modules` && echo \"node_modules folders removed!\""
+    "clean:npm:uninstall": "rm -rf `find -type d -name node_modules` && echo \"node_modules folders removed!\"",
+    "export": "node --unhandled-rejections=strict task/export.mjs"
   },
   "browserslist": [
     "last 1 Firefox versions",
@@ -38,6 +38,7 @@
     "chokidar-cli": "^2.1.0",
     "concurrently": "^5.2.0",
     "core-js": "^3.6.5",
+    "fs-extra": "^9.0.1",
     "lerna": "^3.22.1",
     "lit-css": "^0.1.3",
     "lit-html": "^1.2.1",

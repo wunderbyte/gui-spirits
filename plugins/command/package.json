@@ -1,0 +1,8 @@
+{
+  "name": "@gui/plugin-command",
+  "version": "0.0.0",
+  "module": "CommandPlugin.js",
+  "dependencies": {
+    "@gui/data-utils": "0.0.0"
+  }
+}

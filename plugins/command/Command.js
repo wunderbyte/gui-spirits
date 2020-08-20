@@ -1,3 +1,5 @@
+import { cast } from '@gui/data-utils';
+
 /**
  * Tracking consumed Commands (not as a property on
  * the Command since we'll freeze that in devmode).
@@ -41,7 +43,7 @@ export class Command {
 	value = null;
 
 	/**
-	 * The {ClickEvent} or whatever in case we'd 
+	 * The {ClickEvent} or whatever in case we'd
 	 * like to `preventDefault` it or something.
 	 * @type {Event}
 	 */
@@ -59,7 +61,7 @@ export class Command {
 			name: elm.name ?? null,
 			type: data.command,
 			target: elm,
-			[event]: e
+			[event]: e,
 		});
 	}
 

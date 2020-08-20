@@ -1,5 +1,4 @@
-import { cast } from '@utils/object-utils';
-import { MapSet } from '@utils/data-utils';
+import { MapSet, cast } from '@gui/data-utils';
 
 /**
  * Working with attributes.

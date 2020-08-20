@@ -1,5 +1,5 @@
 {
-  "name": "@utils/data-utils",
+  "name": "@gui/data-utils",
   "version": "0.0.0",
   "module": "index.js"
 }

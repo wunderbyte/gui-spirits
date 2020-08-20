@@ -10,7 +10,7 @@ export function CSSPlugin(elm) {
 		/**
 		 * Add classes.
 		 * @param  {...string} names
-		 * @returns {this} 
+		 * @returns {this}
 		 */
 		add(...names) {
 			cache.add(...names);
@@ -19,8 +19,8 @@ export function CSSPlugin(elm) {
 
 		/**
 		 * Remove classes (via the semantics of a {Set}).
-		 * @param  {...string} names 
-		 * @returns {this} 
+		 * @param  {...string} names
+		 * @returns {this}
 		 */
 		delete(...names) {
 			cache.delete(...names);
@@ -30,7 +30,7 @@ export function CSSPlugin(elm) {
 		/**
 		 * Remove classes shorthand.
 		 * @param  {...string} names
-		 * @returns {this}  
+		 * @returns {this}
 		 */
 		del(...names) {
 			return plugin.delete(...names);
@@ -39,7 +39,7 @@ export function CSSPlugin(elm) {
 		/**
 		 * Has classes?
 		 * @param  {...string} names
-		 * @returns {this}  
+		 * @returns {this}
 		 */
 		has(...names) {
 			return names.every((name) => elm.classList.contains(name));
@@ -47,9 +47,9 @@ export function CSSPlugin(elm) {
 
 		/**
 		 * Toggle single class.
-		 * @param {string} name 
+		 * @param {string} name
 		 * @param {truthy} on
-		 * @returns {this}  
+		 * @returns {this}
 		 */
 		toggle(name, on) {
 			cache.toggle(name, on);
@@ -58,9 +58,9 @@ export function CSSPlugin(elm) {
 
 		/**
 		 * Toggle multiple classes.
-		 * @param {truthy} on 
+		 * @param {truthy} on
 		 * @param  {...any} names
-		 * @returns {this}  
+		 * @returns {this}
 		 */
 		shift(on, ...names) {
 			names.forEach((name) => this.toggle(name, on));
@@ -69,10 +69,10 @@ export function CSSPlugin(elm) {
 
 		/**
 		 * Set CSS variable.
-		 * @param {string} name 
-		 * @param {string} value 
+		 * @param {string} name
+		 * @param {string} value
 		 * @param {Element} target
-		 * @returns {this}  
+		 * @returns {this}
 		 */
 		setProperty(name, value, target) {
 			(target ? target.style : elm.style).setProperty(name, value);
@@ -81,9 +81,9 @@ export function CSSPlugin(elm) {
 
 		/**
 		 * Get CSS variable.
-		 * @param {string} name 
+		 * @param {string} name
 		 * @param {Element} target
-		 * @returns {this}  
+		 * @returns {this}
 		 */
 		getProperty(name, target) {
 			return getComputedStyle(target || elm).getPropertyValue(name);
@@ -92,8 +92,8 @@ export function CSSPlugin(elm) {
 		/**
 		 * Get or destructively set the entire classname.
 		 * TODO: when setting, persist assigned classes in cache!
-		 * @param {string} name 
-		 * @returns {this} 
+		 * @param {string} name
+		 * @returns {this}
 		 */
 		name(name) {
 			return arguments.length ? void (elm.className = name) : elm.className;

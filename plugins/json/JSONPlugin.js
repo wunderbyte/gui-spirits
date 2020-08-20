@@ -1,6 +1,6 @@
 /**
  * Working with JSON from embedded `<script type="application/json">`
- * TODO: Support invalid JSON (with some simple hand-coded JS syntax) 
+ * TODO: Support invalid JSON (with some simple hand-coded JS syntax)
  * @param {SpiritElement} elm
  * @returns {CSSPlugin}
  */

@@ -1,0 +1,8 @@
+{
+  "name": "@gui/plugin-att",
+  "version": "0.0.0",
+  "module": "AttPlugin.js",
+  "dependencies": {
+    "@gui/data-utils": "0.0.0"
+  }
+}

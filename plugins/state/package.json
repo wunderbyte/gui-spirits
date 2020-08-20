@@ -1,0 +1,5 @@
+{
+  "name": "@gui/plugin-state",
+  "version": "0.0.0",
+  "module": "SimpleStatePlugin.js"
+}
