@@ -6,7 +6,7 @@
  * @param {HTMLElement|ShadowRoot} elm
  * @returns {IntersectionPlugin}
  */
-export function IntersectionPlugin(elm) {
+export default function IntersectionPlugin(elm) {
 	/**
 	 * Register intersection callback. Returns a function to unregister.
 	 * @param {Function} cb

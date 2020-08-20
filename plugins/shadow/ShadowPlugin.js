@@ -8,7 +8,7 @@ export { css } from 'lit-css';
  * @param {undefined} [plugin]
  * @returns {ShadowPlugin}
  */
-export function ShadowPlugin(elm) {
+export default function ShadowPlugin(elm) {
 	const shadow = elm.ShadowRoot || elm.attachShadow({ mode: 'open' });
 	const plugin = {};
 	const sheets = [];

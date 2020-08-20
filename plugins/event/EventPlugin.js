@@ -3,7 +3,7 @@
  * @param {SpiritElement} elm
  * @returns {EventPlugin}
  */
-export function EventPlugin(elm) {
+export default function EventPlugin(elm) {
 	/**
 	 * Tracking added listeners (not caring if they are removed).
 	 * @type {Set<Function|Object>}

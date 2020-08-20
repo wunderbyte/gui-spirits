@@ -12,7 +12,7 @@ const oncommand = Symbol('oncommand');
  * @param {SpiritElement} elm
  * @returns {CommandPlugin}
  */
-export function CommandPlugin(elm, prod) {
+export default function CommandPlugin(elm, prod) {
 	const map = new MapSet();
 	const plugin = {
 		/**

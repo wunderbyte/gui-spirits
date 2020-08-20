@@ -4,7 +4,7 @@
  * @param {SpiritElement} elm
  * @returns {CSSPlugin}
  */
-export function JSONPlugin(elm) {
+export default function JSONPlugin(elm) {
 	return {
 		/**
 		 * Parse JSON to object or array. Note that is must be valid JSON (for now).

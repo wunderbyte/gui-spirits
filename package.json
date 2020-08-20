@@ -13,7 +13,7 @@
     "clean:npm": "npm run clean:npm:unlock && npm run clean:npm:uninstall",
     "clean:npm:unlock": "find . -name \"package-lock.json\" -not -path \"./node_modules/*\" -delete && echo \"package-lock.json files removed!\"",
     "clean:npm:uninstall": "rm -rf `find -type d -name node_modules` && echo \"node_modules folders removed!\"",
-    "export": "node --unhandled-rejections=strict task/export.mjs"
+    "export": "node --unhandled-rejections=strict tasks/export.mjs"
   },
   "browserslist": [
     "last 1 Firefox versions",

@@ -36,7 +36,7 @@ let [set1, set2] = [new Set(), new Set()];
  * @param {SpiritElement} context
  * @returns {DOMPlugin}
  */
-export function DOMPlugin(context) {
+export default function DOMPlugin(context) {
 	const plugin = {};
 	return Object.assign(
 		plugin,

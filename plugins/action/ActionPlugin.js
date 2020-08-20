@@ -24,7 +24,7 @@ const [ASCEND, DESCEND, BROADCAST] = [0, 1, 2];
  * @param {SpiritElement} elm
  * @returns {AttPlugin}
  */
-export function ActionPlugin(elm, prod) {
+export default function ActionPlugin(elm, prod) {
 	const map = new MapSet();
 	const run = (dir, type, data) => dispatch(dir, elm, type, data, prod);
 	const plugin = {

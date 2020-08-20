@@ -4,7 +4,7 @@
  * @param {SpiritElement} elm
  * @returns {CSSPlugin}
  */
-export function CSSPlugin(elm) {
+export default function CSSPlugin(elm) {
 	const cache = CSSCache(elm);
 	const plugin = {
 		/**

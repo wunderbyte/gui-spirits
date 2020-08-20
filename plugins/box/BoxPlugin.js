@@ -4,7 +4,7 @@
  * @param {SpiritElement} elm
  * @returns {BoxPlugin}
  */
-export function BoxPlugin(elm) {
+export default function BoxPlugin(elm) {
 	const box = () => elm.getBoundingClientRect();
 	return {
 		/**

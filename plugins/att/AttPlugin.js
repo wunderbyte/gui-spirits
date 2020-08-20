@@ -5,7 +5,7 @@ import { MapSet, cast } from '@gui/data-utils';
  * @param {SpiritElement} elm
  * @returns {AttPlugin}
  */
-export function AttPlugin(elm) {
+export default function AttPlugin(elm) {
 	let obs, map;
 	const plugin = {
 		/**

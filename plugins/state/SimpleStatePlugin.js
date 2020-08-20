@@ -3,7 +3,7 @@
  * so that the framework doesn't `Object.freeze` the whole thing in devmode.
  * @returns {Object}
  */
-export function SimpleStatePlugin() {
+export default function SimpleStatePlugin() {
 	return Object.assign(Object.create(null), {
 		[Symbol.for(Object.freeze)]: false,
 	});
