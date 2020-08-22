@@ -50,7 +50,7 @@ function traverse(target, dirs) {
 function namepair(dir) {
 	const json = readFileSync(dir + '/package.json');
 	const data = JSON.parse(json);
-	return [data.name.replace('@gui/', ''), dir];
+	return [data.name, dir];
 }
 
 /**
@@ -69,7 +69,7 @@ function copydir(target) {
  * @returns {Promise}
  */
 function license(target) {
-	return fsextras.copy('LICENSE', join(target, 'LICENSE'));
+	return fsextras.copy('LICENSE', join(target + '@gui', 'LICENSE'));
 }
 
 /**
