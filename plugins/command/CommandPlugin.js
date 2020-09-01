@@ -24,7 +24,8 @@ export default function CommandPlugin(elm, prod) {
 		on(types, cb) {
 			each(types, (type) => map.add(type, cb));
 			elm[oncommand] ??= testcommand(map);
-			setup(prod);
+			!setup.done && setup(prod);
+			setup.done = true;
 			return plugin;
 		},
 
@@ -111,10 +112,9 @@ function runcommand(command, cbs) {
  * @param {boolean} prod
  */
 function setup(prod) {
-	if (!setup.done) {
-		document.addEventListener('click', (e) => onclick(e, e.target, prod));
-		setup.done = true;
-	}
+	document.addEventListener('click', (e) => {
+		onclick(e, e.target, prod);
+	});
 }
 
 /**
