@@ -138,6 +138,7 @@ function CSSCache(elm) {
 			css.remove(...names);
 		},
 		toggle(name, on) {
+			// WRONG spread ...arguments and use arguments.length!
 			on === undefined ? css.toggle(name) : css.toggle(name, !!on);
 			css.contains(name) ? add(name) : del(name);
 		},
