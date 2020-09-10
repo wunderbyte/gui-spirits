@@ -138,7 +138,7 @@ function CSSCache(elm) {
 			css.remove(...names);
 		},
 		toggle(name, on) {
-			arguments.length == 1 ? css.toggle(name) : css.toggle(name, !!on);
+			on === undefined ? css.toggle(name) : css.toggle(name, !!on);
 			css.contains(name) ? add(name) : del(name);
 		},
 		has(name) {
