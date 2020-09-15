@@ -57,7 +57,7 @@ export class Command {
 	 */
 	constructor(elm, e, data = elm.dataset) {
 		Object.assign(this, {
-			value: cast(data.value ?? elm.value ?? null),
+			value: evaluate(elm, data),
 			name: elm.name ?? null,
 			type: data.command,
 			target: elm,
@@ -87,5 +87,19 @@ export class Command {
 	 */
 	get consumed() {
 		return consumed.has(this);
+	}
+}
+
+/**
+ * @param {HTMLElement} elm 
+ * @param {DOMStringMap} data 
+ * @returns {string|boolean|null}
+ */
+function evaluate(elm, data) {
+	switch(elm.type) {
+		case 'checkbox':
+			return elm.checked; // TODO: other things!
+		default:
+			return cast(data.value ?? elm.value ?? null)
 	}
 }

@@ -2,18 +2,13 @@ import { MapSet } from '@gui/data-utils';
 import { Command } from './Command';
 
 /**
- * Stamp the secret method.
- * @type {Symbol}
- */
-const oncommand = Symbol('oncommand');
-
-/**
  * Working with attributes.
- * @param {SpiritElement} elm
+ * @param {SpiritElement|HTMLElement|ShadowRoot} elm
  * @returns {CommandPlugin}
  */
 export default function CommandPlugin(elm, prod) {
 	const map = new MapSet();
+	const key = Symbol('oncommand'); // TODO: Refactor this thing out of here!
 	const plugin = {
 		/**
 		 * Add command listener(s).
@@ -23,9 +18,10 @@ export default function CommandPlugin(elm, prod) {
 		 */
 		on(types, cb) {
 			each(types, (type) => map.add(type, cb));
-			elm[oncommand] ??= testcommand(map);
-			!setup.done && setup(prod);
-			setup.done = true;
+			if (!elm[key]) {
+				elm[key] = testcommand(map);
+				setup(elm, key, prod);
+			}
 			return plugin;
 		},
 
@@ -37,7 +33,7 @@ export default function CommandPlugin(elm, prod) {
 		 */
 		off(types, cb) {
 			each(types, (type) => map.del(type, cb));
-			map.size === 0 && delete elm[oncommand];
+			map.size === 0 && delete elm[key];
 			return plugin;
 		},
 
@@ -60,9 +56,18 @@ export default function CommandPlugin(elm, prod) {
 		 * Cleanup.
 		 */
 		onexorcise() {
-			delete elm[oncommand];
+			delete elm[key];
 			map.clear();
 		},
+
+		/**
+		 * Working with exotic nodes.
+		 * @param {HTMLElement|ShadowRoot} node 
+		 * @returns {CommandPlugin}
+		 */
+		wrap(node) {
+			return CommandPlugin(node, prod);
+		}
 	};
 	return plugin;
 }
@@ -79,10 +84,39 @@ function each(types, command) {
 	[].concat(types.split ? types.split(' ') : types).forEach(command);
 }
 
+// Setup .......................................................................
+
+/**
+ * TODO: Form field specials `oninput`, `onchange`, `paste` etc.
+ * Checkboxes should trigger boolean or string values (if value).
+ * @param {SpiritElement|ShadowRoot} node
+ * @param {Symbol} key
+ * @param {boolean} prod
+ */
+function setup(node, key, prod) {
+	node.addEventListener('click', (e) => {
+		onclick(e, e.target, key, prod);
+	});
+}
+
+/**
+ * Walk the tree upwards until a potential listener is found.
+ * @param {Event} e
+ * @param {HTMLElement} elm
+ * @param {boolean} prod
+ */
+function onclick(e, elm, key, prod) {
+	elm
+		? elm.dataset.command
+			? trigger(e, elm, key, prod)
+			: onclick(e, elm.parentElement, key, prod)
+		: void false;
+}
+
 // Evaluating ..................................................................
 
 /**
- * Generate the secret `[oncommand]` method.
+ * Generate the secret `[key]` method.
  * @param {MapSet} map
  * @returns {Function}
  */
@@ -106,59 +140,36 @@ function runcommand(command, cbs) {
 // Dispatching .................................................................
 
 /**
- * TODO: This in the ShadowRoot, but how to avoid *creating* it?
- * TODO: Form field specials `oninput`, `onchange`, `paste` etc.
- * Checkboxes should trigger boolean or string values (if value).
- * @param {boolean} prod
- */
-function setup(prod) {
-	document.addEventListener('click', (e) => {
-		onclick(e, e.target, prod);
-	});
-}
-
-/**
- * Walk the tree upwards until a potential listener is found.
  * @param {Event} e
  * @param {HTMLElement} elm
- * @param {boolean} prod
- */
-function onclick(e, elm, prod) {
-	elm
-		? elm.dataset.command
-			? trigger(e, elm, prod)
-			: onclick(e, elm.parentElement, prod)
-		: void false;
-}
-
-/**
- * @param {Event} e
- * @param {HTMLElement} elm
+ * @param {Symbol} key
  * @param {boolean} prod
  * @param {DOMStringMap} dataset
  */
-function trigger(e, elm, prod) {
-	ascend(elm, freeze(new Command(elm, e), prod));
+function trigger(e, elm, key, prod) {
+	ascend(elm, key, freeze(new Command(elm, e), prod));
 }
 
 /**
  * Dispatch {Command} upwards.
- * @param {HTMLElement} elm
+ * @param {HTMLElement|ShadowRoot} elm
+ * @param {Symbol} key
  * @param {Command} command
  */
-function ascend(elm, command) {
-	elm && trycommand(elm, command);
-	elm && ascend(elm.parentElement, command);
+function ascend(elm, key, command) {
+	elm && trycommand(elm, key, command);
+	elm && ascend(elm.parentNode, key, command);
 }
 
 /**
  * Check for secret method and run it to potentially match
  * the {Command} with the element (see function `testcommand`).
  * @param {SpiritElement} elm
+ * @param {Symbol} key
  * @param {Command} command
  */
-function trycommand(elm, command) {
-	!command.consumed && elm[oncommand] && elm[oncommand](command);
+function trycommand(elm, key, command) {
+	!command.consumed && elm[key] && elm[key](command);
 }
 
 /**
