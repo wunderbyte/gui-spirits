@@ -24,9 +24,9 @@ export class Command {
 	command = this;
 
 	/**
-	 * Although conventionally named target,
-	 * this property pins the command source.
-	 * @type {SpiritElement}
+	 * Although conventionally named `target`, this property pins 
+	 * the DOM element *source* that triggered this command.
+	 * @type {HTMLElement}
 	 */
 	target = null;
 
@@ -58,6 +58,7 @@ export class Command {
 	constructor(elm, e, data = elm.dataset) {
 		Object.assign(this, {
 			value: evaluate(elm, data),
+			href: elm.href ?? null,
 			name: elm.name ?? null,
 			type: data.command,
 			target: elm,

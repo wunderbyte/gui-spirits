@@ -139,6 +139,8 @@ function runcommand(command, cbs) {
 
 // Dispatching .................................................................
 
+// TODO: This ascending crawling of the DOM should not be needed no more!
+
 /**
  * @param {Event} e
  * @param {HTMLElement} elm
