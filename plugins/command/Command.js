@@ -69,15 +69,12 @@ export class Command {
 	/**
 	 * Consume the dispatched command to prevent further processing.
 	 * This will also block and inhibit the internally set DOM event.
+	 * TODO: Handle defered call scenario (consumed on setTimeout etc).
 	 * @returns {Command}
 	 */
 	consume() {
-		try {
-			this[event].stopPropagation();
-			this[event].preventDefault();
-		} catch {
-			// TODO: confirm that we'd need this try catch if deferred (timeout)
-		}
+		this[event].stopPropagation();
+		this[event].preventDefault();
 		consumed.add(this);
 		return this;
 	}
