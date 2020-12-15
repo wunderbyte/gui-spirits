@@ -1,0 +1,5 @@
+{
+  "name": "@gui/plugin-trash",
+  "version": "0.0.0",
+  "module": "TrashPlugin.js"
+}

@@ -62,12 +62,12 @@ export default function CommandPlugin(elm, prod) {
 
 		/**
 		 * Working with exotic nodes.
-		 * @param {HTMLElement|ShadowRoot} node 
+		 * @param {HTMLElement|ShadowRoot} node
 		 * @returns {CommandPlugin}
 		 */
 		wrap(node) {
 			return CommandPlugin(node, prod);
-		}
+		},
 	};
 	return plugin;
 }

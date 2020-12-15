@@ -41,6 +41,7 @@ export default function DOMPlugin(context) {
 	return Object.assign(
 		plugin,
 		common(context, plugin),
+		normal(context, plugin),
 		render(context, plugin),
 		extras(plugin)
 	);
@@ -259,6 +260,20 @@ export function render(context, plugin, parser = (input) => input) {
 }
 
 // Scoped ......................................................................
+
+/**
+ * Working with the local light (but not the Shadow DOM).
+ * @param {SpiritElement} context
+ * @param {Object} plugin
+ * @returns {Object}
+ */
+function normal(context, plugin) {
+	return {
+		closest(selector) {
+			return context.closest(selector);
+		}
+	}
+}
 
 /**
  * Working with the *global* light DOM.

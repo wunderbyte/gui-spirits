@@ -24,7 +24,7 @@ export class Command {
 	command = this;
 
 	/**
-	 * Although conventionally named `target`, this property pins 
+	 * Although conventionally named `target`, this property pins
 	 * the DOM element *source* that triggered this command.
 	 * @type {HTMLElement}
 	 */
@@ -89,15 +89,15 @@ export class Command {
 }
 
 /**
- * @param {HTMLElement} elm 
- * @param {DOMStringMap} data 
+ * @param {HTMLElement} elm
+ * @param {DOMStringMap} data
  * @returns {string|boolean|null}
  */
 function evaluate(elm, data) {
-	switch(elm.type) {
+	switch (elm.type) {
 		case 'checkbox':
 			return elm.checked; // TODO: other things!
 		default:
-			return cast(data.value ?? elm.value ?? null)
+			return cast(data.value ?? elm.value ?? null);
 	}
 }
