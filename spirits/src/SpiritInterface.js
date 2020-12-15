@@ -2,11 +2,13 @@
  * Define on the element all methods, properties and accessors
  * from the interface (potentially) returned by the controller.
  * @param {SpiritElement} elm
- * @param {Object} expandos
+ * @param {Object|Promise} expandos
  * @param {boolean} prod
+ * @returns {Promise}
  */
-export function expand(elm, expandos, prod) {
-	const descs = Object.getOwnPropertyDescriptors(expandos);
+export async function expand(elm, expandos, prod) {
+	expandos = isPromise(expandos) ? await expandos : expandos;
+	const descs = Object.getOwnPropertyDescriptors(expandos || {});
 	const props = index(descs, elm);
 	remove(props, elm);
 	define(descs, elm, prod);
@@ -14,6 +16,16 @@ export function expand(elm, expandos, prod) {
 }
 
 // Scoped ......................................................................
+
+/**
+ * The component expandos may be resolved by a promise. Component users must 
+ * in that case beware that any methods exposed by the component may not be 
+ * immediately callable. TODO: Create system promising the component itself
+ * @param {Object|Promise} expandos
+ */
+function isPromise(expandos) {
+	return Promise.resolve(expandos) === expandos;
+}
 
 /**
  * Index all properties with an corresponding setter that
@@ -36,9 +48,7 @@ function index(descs, elm) {
  * @param {SpiritElement} elm
  */
 function remove(props, elm) {
-	props.forEach(([key]) => {
-		delete elm[key];
-	});
+	props.forEach(([key]) => delete elm[key]);
 }
 
 /**
