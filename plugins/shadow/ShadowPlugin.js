@@ -4,7 +4,7 @@ export { css } from 'lit-css';
 /**
  * Working with the Shadow DOM.
  * Borrows from the normal DOM.
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @param {undefined} [plugin]
  * @returns {ShadowPlugin}
  */

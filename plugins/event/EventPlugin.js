@@ -1,6 +1,6 @@
 /**
  * Working with events.
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @returns {EventPlugin}
  */
 export default function EventPlugin(elm) {
@@ -63,7 +63,7 @@ export default function EventPlugin(elm) {
 		},
 
 		/**
-		 * Conveniently shortcut click handler on the {SpiritElement}.
+		 * Conveniently shortcut click handler on the {CustomElement}.
 		 * @param {Function|SpiritElement} handler
 		 * @param {boolean} [capture]
 		 */

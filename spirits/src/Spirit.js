@@ -5,7 +5,7 @@ import { frozen } from './SpiritUtils';
 export const [disconnect, reconnect, exorcise] = [Symbol(), Symbol(), Symbol()];
 
 /**
- * @param {SpiritElement} element
+ * @param {CustomElement} element
  * @param {Map<string, Function>} plugins
  * @param {boolean} prod
  * @returns {Spirit}
@@ -40,7 +40,7 @@ function spirit(element, accessed) {
 
 		/**
 		 * Expose the element.
-		 * @type {SpiritElement}
+		 * @type {CustomElement}
 		 */
 		get element() {
 			return element;

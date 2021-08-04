@@ -33,7 +33,7 @@ let [set1, set2] = [new Set(), new Set()];
 
 /**
  * Working with the light DOM.
- * @param {SpiritElement} context
+ * @param {CustomElement} context
  * @returns {DOMPlugin}
  */
 export default function DOMPlugin(context) {
@@ -263,7 +263,7 @@ export function render(context, plugin, parser = (input) => input) {
 
 /**
  * Working with the local light (but not the Shadow DOM).
- * @param {SpiritElement} context
+ * @param {CustomElement} context
  * @param {Object} plugin
  * @returns {Object}
  */
@@ -271,8 +271,8 @@ function normal(context, plugin) {
 	return {
 		closest(selector) {
 			return context.closest(selector);
-		}
-	}
+		},
+	};
 }
 
 /**

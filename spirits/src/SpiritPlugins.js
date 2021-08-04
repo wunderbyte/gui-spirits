@@ -5,7 +5,7 @@ const runexorcise = (plugin) => plugin.onexorcise();
 
 /**
  * Building accessors for lazy intantiation of spirit plugins.
- * @param {SpiritElement} element
+ * @param {CustomElement} element
  * @param {Array<Object>} accessed
  * @param {Map<string, Function>} plugins
  * @param {boolean} prod
@@ -29,7 +29,7 @@ export function unplug(accessed) {
 
 /**
  * Build function to declare plugin accessor.
- * @param {SpiritElement} element
+ * @param {CustomElement} element
  * @param {Array<Object>} accessed
  * @param {boolean} prod
  * @returns {Function}
@@ -51,7 +51,7 @@ function accessor(element, accessed, prod) {
 /**
  * Invoke plugin factory function and cache the returned the plugin instance.
  * @param {Function} plugin
- * @param {SpiritElement} element
+ * @param {CustomElement} element
  * @param {Array<Object>} accessed
  * @param {boolean} prod
  * @returns {Object}

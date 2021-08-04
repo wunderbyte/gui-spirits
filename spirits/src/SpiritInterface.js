@@ -1,7 +1,7 @@
 /**
  * Define on the element all methods, properties and accessors
  * from the interface (potentially) returned by the controller.
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @param {Object|Promise} expandos
  * @param {boolean} prod
  * @returns {Promise}
@@ -18,8 +18,8 @@ export async function expand(elm, expandos, prod) {
 // Scoped ......................................................................
 
 /**
- * The component expandos may be resolved by a promise. Component users must 
- * in that case beware that any methods exposed by the component may not be 
+ * The component expandos may be resolved by a promise. Component users must
+ * in that case beware that any methods exposed by the component may not be
  * immediately callable. TODO: Create system promising the component itself
  * @param {Object|Promise} expandos
  */
@@ -32,7 +32,7 @@ function isPromise(expandos) {
  * may have been assigned before the controller executed.
  * TODO: Handle value descriptors!
  * @param {Array<Object>} descs
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @returns {Array<string, *>}
  */
 function index(descs, elm) {
@@ -45,7 +45,7 @@ function index(descs, elm) {
 /**
  * Remove traces of indexed properties.
  * @param {Array<string, *>} props
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  */
 function remove(props, elm) {
 	props.forEach(([key]) => delete elm[key]);
@@ -54,7 +54,7 @@ function remove(props, elm) {
 /**
  * Transfer descriptors to element.
  * @param {Array<Object>} descs
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @param {boolean} prod
  */
 function define(descs, elm, prod) {
@@ -74,7 +74,7 @@ function define(descs, elm, prod) {
  * Run setters with indexed values.
  * TODO: Handle value descriptors!
  * @param {Array<string, *>} props
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  */
 function assign(props, elm) {
 	props.forEach(([, val, desc]) => {

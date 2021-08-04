@@ -21,7 +21,7 @@ const [ASCEND, DESCEND, BROADCAST] = [0, 1, 2];
 
 /**
  * Working with attributes.
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @returns {AttPlugin}
  */
 export default function ActionPlugin(elm, prod) {
@@ -189,7 +189,7 @@ function descend(elm, action) {
 /**
  * Check for secret method and run it to potentially match
  * the {Action} with the element (see function `testaction`).
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @param {Action} action
  */
 function tryaction(elm, action) {

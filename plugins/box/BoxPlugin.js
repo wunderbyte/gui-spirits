@@ -1,7 +1,7 @@
 /**
  * Working with position and dimension.
  * TODO: Interface that accounts for scrolling (and what is scrolling!)
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @returns {BoxPlugin}
  */
 export default function BoxPlugin(elm) {

@@ -10,7 +10,7 @@ export default function TrashPlugin() {
 		 * @returns {Function} action
 		 */
 		collect(action) {
-			actions.add(action);
+			actions.add(validate(action, elm));
 			return action;
 		},
 
@@ -30,4 +30,19 @@ export default function TrashPlugin() {
 		},
 	};
 	return plugin;
+}
+
+// Scoped ......................................................................
+
+/**
+ * Confirm that really received a function since
+ * things will not immediately break otherwise.
+ * @param {Function} action
+ * @returns {Function}
+ */
+function validate(action, elm) {
+	if (!action || !action.call || !action.apply) {
+		throw new Error(`Function expected (${elm.localName})`);
+	}
+	return action;
 }

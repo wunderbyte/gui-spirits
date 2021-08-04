@@ -2,8 +2,8 @@ import { MapSet, cast } from '@gui/data-utils';
 
 /**
  * Working with attributes.
- * @param {SpiritElement} elm
- * @returns {AttPlugin}
+ * @param {CustomElement} elm
+ * @returns {this}
  */
 export default function AttPlugin(elm) {
 	let obs, map;
@@ -95,7 +95,7 @@ export default function AttPlugin(elm) {
 		/**
 		 * Resolve element attributes via this API.
 		 * @param {HTMLElement} newelm
-		 * @returns {AttPlugin}
+		 * @returns {this}
 		 */
 		wrap(newelm) {
 			return AttPlugin(newelm);

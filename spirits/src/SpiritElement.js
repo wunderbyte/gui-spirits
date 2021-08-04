@@ -43,7 +43,7 @@ export default function (controller, plugins, prod) {
  * Element removed from DOM?
  * TODO: Does this work in Shadow DOM?
  * TODO: Multiple elms disconnected should not all queue a timeout!
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @returns {Promise<boolean>}
  */
 function didexit(elm) {

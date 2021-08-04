@@ -7,7 +7,7 @@ import SpiritElement from './SpiritElement';
  * @param {Function} controller
  * @param {Map<string, Function>} [plugins]
  * @param {boolean} [prod]
- * @returns {SpiritElement}
+ * @returns {CustomElement}
  */
 export function summon(tag, controller, plugins = new Map(), prod = false) {
 	customElements.define(tag, SpiritElement(controller, plugins, prod));

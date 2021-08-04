@@ -18,7 +18,7 @@ export class Action {
 	/**
 	 * Although conventionally named target,
 	 * this property pins the action source.
-	 * @type {SpiritElement}
+	 * @type {CustomElement}
 	 */
 	target = null;
 
@@ -36,7 +36,7 @@ export class Action {
 
 	/**
 	 * Initialize that action.
-	 * @param {SpiritElement} target
+	 * @param {CustomElement} target
 	 * @param {string} type
 	 * @param {?} data
 	 */

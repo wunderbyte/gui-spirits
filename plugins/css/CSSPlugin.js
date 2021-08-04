@@ -1,7 +1,7 @@
 /**
  * Working with classnames.
  * TODO: Support arrays and space-separated strings in all methods!
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @returns {CSSPlugin}
  */
 export default function CSSPlugin(elm) {
@@ -102,7 +102,7 @@ export default function CSSPlugin(elm) {
 		/**
 		 * Use this API to work with classes for arbitrary element.
 		 * @param {Element} newelm
-		 * @returns {CSSPlugin}
+		 * @returns {this}
 		 */
 		wrap(newelm) {
 			return CSSPlugin(newelm);
@@ -118,7 +118,7 @@ const restorecache = Symbol('restorecache');
 
 /**
  * Manage classnames while ensuring that frameworks cannot remove them.
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  */
 function CSSCache(elm) {
 	const set = new Set();

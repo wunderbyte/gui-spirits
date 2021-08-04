@@ -1,6 +1,8 @@
 import { MapSet } from '@gui/data-utils';
 import { Command } from './Command';
 
+const key = Symbol('oncommand'); // TODO: Refactor this thing out of here!
+
 /**
  * Working with attributes.
  * @param {SpiritElement|HTMLElement|ShadowRoot} elm
@@ -8,7 +10,6 @@ import { Command } from './Command';
  */
 export default function CommandPlugin(elm, prod) {
 	const map = new MapSet();
-	const key = Symbol('oncommand'); // TODO: Refactor this thing out of here!
 	const plugin = {
 		/**
 		 * Add command listener(s).
@@ -18,10 +19,8 @@ export default function CommandPlugin(elm, prod) {
 		 */
 		on(types, cb) {
 			each(types, (type) => map.add(type, cb));
-			if (!elm[key]) {
-				elm[key] = testcommand(map);
-				setup(elm, key, prod);
-			}
+			goOn(elm.shadowRoot, map, prod);
+			goOn(elm, map, prod);
 			return plugin;
 		},
 
@@ -33,7 +32,8 @@ export default function CommandPlugin(elm, prod) {
 		 */
 		off(types, cb) {
 			each(types, (type) => map.del(type, cb));
-			map.size === 0 && delete elm[key];
+			goOff(elm.shadowRoot, map);
+			goOff(elm, map);
 			return plugin;
 		},
 
@@ -63,7 +63,7 @@ export default function CommandPlugin(elm, prod) {
 		/**
 		 * Working with exotic nodes.
 		 * @param {HTMLElement|ShadowRoot} node
-		 * @returns {CommandPlugin}
+		 * @returns {this}
 		 */
 		wrap(node) {
 			return CommandPlugin(node, prod);
@@ -82,6 +82,26 @@ export default function CommandPlugin(elm, prod) {
  */
 function each(types, command) {
 	[].concat(types.split ? types.split(' ') : types).forEach(command);
+}
+
+/**
+ * @param {CustomElement|ShadowRoot} elm
+ * @param {Map<string, Function>} map
+ * @param {boolean} prod
+ */
+function goOn(elm, map, prod) {
+	if (elm && !elm[key]) {
+		elm[key] = testcommand(map);
+		setup(elm, key, prod);
+	}
+}
+
+/**
+ * @param {CustomElement|ShadowRoot} elm
+ * @param {Map<string, Function>} map
+ */
+function goOff(elm, map) {
+	map.size === 0 && delete elm[key];
 }
 
 // Setup .......................................................................
@@ -166,7 +186,7 @@ function ascend(elm, key, command) {
 /**
  * Check for secret method and run it to potentially match
  * the {Command} with the element (see function `testcommand`).
- * @param {SpiritElement} elm
+ * @param {CustomElement} elm
  * @param {Symbol} key
  * @param {Command} command
  */
