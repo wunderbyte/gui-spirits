@@ -197,9 +197,11 @@ export function common(context, plugin) {
 		/**
 		 * Remove spirit element or specified target.
 		 * @param {Node|DocumentFragment} [target]
+		 * @returns {this}
 		 */
-		remove(target = context) {
-			return target.remove();
+		 remove(target = context) {
+			target.remove();
+			return plugin;
 		},
 
 		/**
