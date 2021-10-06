@@ -115,7 +115,18 @@ function goOff(elm, map) {
  */
 function setup(node, key, prod) {
 	node.addEventListener('click', (e) => {
-		onclick(e, e.target, key, prod);
+		/*
+		 * What's this now? A hardware problem? Some nodes started
+		 * registering two clicks for some strange reason: Hotfix!
+		 * Let's look into this as part of the refactoring :/
+		 */
+		if (!setup.suspended) {
+			onclick(e, e.target, key, prod);
+			setup.suspended = true;
+			setTimeout(() => {
+				setup.suspended = false;
+			});
+		}
 	});
 }
 
