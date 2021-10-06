@@ -199,7 +199,7 @@ export function common(context, plugin) {
 		 * @param {Node|DocumentFragment} [target]
 		 * @returns {this}
 		 */
-		 remove(target = context) {
+		remove(target = context) {
 			target.remove();
 			return plugin;
 		},
