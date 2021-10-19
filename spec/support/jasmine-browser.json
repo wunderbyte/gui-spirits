@@ -1,0 +1,21 @@
+{
+  "srcDir": "bogusfolder",
+  "srcFiles": [
+    "**/*.?(m)js"
+  ],
+  "specDir": "spec",
+  "specFiles": [
+    "spec.mjs"
+  ],
+  "helpers": [
+    "helpers/**/*.?(m)js"
+  ],
+  "env": {
+    "stopSpecOnExpectationFailure": false,
+    "stopOnSpecFailure": false,
+    "random": true
+  },
+  "browser": {
+    "name": "firefox"
+  }
+}

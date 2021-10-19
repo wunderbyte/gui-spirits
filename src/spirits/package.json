@@ -1,7 +1,7 @@
 {
   "name": "@gui/spirits",
   "version": "0.0.0",
-  "module": "src/index.js",
+  "module": "index.js",
   "dependencies": {
     "@gui/callback-utils": "0.0.0"
   }
