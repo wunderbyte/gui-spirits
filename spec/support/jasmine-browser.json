@@ -5,7 +5,7 @@
   ],
   "specDir": "spec",
   "specFiles": [
-    "spec.mjs"
+    "output.mjs"
   ],
   "helpers": [
     "helpers/**/*.?(m)js"

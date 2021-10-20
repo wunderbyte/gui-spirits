@@ -5,9 +5,8 @@ import { join } from 'path';
 /**
  * @filedesc
  * Export modules to external directory for use in foreign project without 
- * involving NPM publishing or Git submodules. Note that since we export 
- * the raw sources only, our foreign project is now in charge of building 
- * this project with all required Babel plugins!
+ * involving NPM publishing or Git submodules. Note that our foreign project 
+ * is now in charge of *transpiling* the code for use in older user agents!
  */
 
 /**
@@ -78,14 +77,10 @@ function license(target) {
  */
 function success(target, dirs) {
 	console.log(`${dirs.length} modules exported into ${target}`);
-	console.log('Make sure to install all required Babel plugins!')
+	console.log('May need to transpile this stuff for older browsers!');
 }
 
 /**
  * Start the whole thing.
  */
-run(process.argv[2], [
-	'spirits',
-	...getDirectories('plugins'),
-	...getDirectories('utils')
-]);
+run(process.argv[2], getDirectories('src'));

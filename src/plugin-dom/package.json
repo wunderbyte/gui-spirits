@@ -4,6 +4,6 @@
   "module": "DOMPlugin.js",
   "dependencies": {
     "@gui/callback-utils": "0.0.0",
-    "lit-html": "^1.4.1"
+    "lit-html": "^2.0.1"
   }
 }

@@ -1,13 +1,17 @@
 // GUI Spirits official plugins (third party)
 import AttPlugin from '@gui/plugin-att';
 import BoxPlugin from '@gui/plugin-box';
+import DOMPlugin from '@gui/plugin-dom';
 import CommandPlugin from '@gui/plugin-command';
+import ShadowPlugin from '@gui/plugin-shadow';
 import { summon } from '@gui/spirits';
 
 const plugins = new Map([
 	['att', AttPlugin],
 	['box', BoxPlugin],
+	['dom', DOMPlugin],
 	['command', CommandPlugin],
+	['shadow', ShadowPlugin]
 ]);
 
 function test(tag, controller) {

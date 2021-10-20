@@ -1,4 +1,3 @@
 node_modules
-dist
-spec/spec.mjs
+spec/output.mjs
 lerna-debug.log

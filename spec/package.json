@@ -1,10 +1,12 @@
 {
-  "name": "@gui/specs",
+  "name": "@gui/spec",
   "version": "0.0.0",
   "dependencies": {
     "@gui/spirits": "0.0.0",
 		"@gui/plugin-att": "0.0.0",
     "@gui/plugin-box": "0.0.0",
-    "@gui/plugin-command": "0.0.0"
+    "@gui/plugin-dom": "0.0.0",
+    "@gui/plugin-command": "0.0.0",
+    "@gui/plugin-shadow": "0.0.0"
   }
 }

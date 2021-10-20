@@ -2,7 +2,6 @@ import { addCallback, runCallbacks } from '@gui/callback-utils';
 import { render as litrender } from 'lit-html';
 export { render as litrender, html } from 'lit-html';
 export { unsafeHTML as unsafe } from 'lit-html/directives/unsafe-html.js';
-export { ifDefined as attif } from 'lit-html/directives/if-defined'; // TODO: reimplement
 
 let [set1, set2] = [new Set(), new Set()];
 
