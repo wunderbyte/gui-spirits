@@ -165,6 +165,7 @@ Unlike with conventional web components, we don't have any code that gets execut
 
 ```js
 summon('my-component', ({ ondisconnect, onreconnect }) => {
+	console.log('first detected in the DOM');
   ondisconnect(() => console.log('removed'));
   onreconnect(() => console.log('inserted again'));
 });
@@ -175,10 +176,10 @@ If the element is removed from the document structure and not re-inserted more o
 
 ```js
 summon('my-component', ({ onexorcise }) => {
-    const i = setTimeout(fetchdata, 1000);
+  const i = setTimeout(fetchdata, 1000);
   onexorcise(() => {
-      console.log('removed for good');
-      clearTimeout(i);
+  	console.log('removed for good');
+    clearTimeout(i);
   });
 });
 ```
