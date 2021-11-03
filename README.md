@@ -9,7 +9,7 @@ npm run export ../myproject/mylibs/
 ```
 
 ### Components
-The library exports a single function `summon` that will register a Custom Element with a callback function. This callback function  — hencforth known as the *controller function*  — gets invoked as soon as the element is found in the DOM. It recieves an object `spirit` as the single argument which has a property `element` that lets you handle the Custom Element.
+The library exports a single function `summon` that will register a Custom Element with a callback function. This callback function, let's call it the *controller function*, gets invoked as soon as the element is found in the DOM. It recieves an object `spirit` as the single argument with a property `element` that lets you handle the Custom Element.
 
 
 ```js
