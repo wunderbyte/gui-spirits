@@ -37,7 +37,8 @@ function run(target, dirs) {
  */
 function traverse(target, dirs) {
 	Promise.all(dirs.map(namepair).map(copydir(target)))
-		.then(license(target))
+		.then(copyfile('README.md', target))
+		.then(copyfile('LICENSE', target))
 		.then(success(target, dirs))
 		.catch(console.error);
 }
@@ -63,12 +64,12 @@ function copydir(target) {
 }
 
 /**
+ * @param {string} name 
  * @param {string} target 
- * @param {Array<string>} pairs 
  * @returns {Promise}
  */
-function license(target) {
-	return fsextras.copy('LICENSE', join(target + '@gui', 'LICENSE'));
+function copyfile(name, target) {
+	return fsextras.copy(name, join(target + '@gui', name));
 }
 
 /**
