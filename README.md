@@ -16,7 +16,7 @@ The library exports a single function `summon` that will register a Custom Eleme
 import { summon } from '@gui/spirits';
 
 summon('my-component', function controller(spirit) {
-	spirit.element.classList.add('inserted');
+  spirit.element.classList.add('inserted');
 });
 ```
 
@@ -25,14 +25,14 @@ By returning an object, the element can expose methods and properties. Remember 
 
 ```js
 summon('my-component', (spirit) => {
-	return {
-		toggle() {
-			element.classList.toggle('toggled');
-		},
-		get toggled() {
-			return element.classList.contains('toggled');
-		}
-	}
+  return {
+    toggle() {
+      element.classList.toggle('toggled');
+    },
+    get toggled() {
+      return element.classList.contains('toggled');
+    }
+  }
 });
 ```
 
@@ -48,17 +48,17 @@ Let's create a simple plugin to maintain CSS classnames.
  * @param {CustomElement} element
  */
 function CSSPlugin(element) {
-	return {
-		add(...names) {
-			element.classList.add(...names);
-		},
-		delete(...names) {
-			element.classList.remove(...names);
-		},
-		has(name) {
-			return element.classList.contains(name);
-		}
-	};
+  return {
+    add(...names) {
+      element.classList.add(...names);
+    },
+    delete(...names) {
+      element.classList.remove(...names);
+    },
+    has(name) {
+      return element.classList.contains(name);
+    }
+  };
 }
 ```
 
@@ -67,9 +67,9 @@ Plugins are simply functions that takes the Custom Element as an argument and re
 
 ```js
 summon('my-component', (spirit) => {
-	spirit.css.add('inserted'); // using the plugin!
+  spirit.css.add('inserted'); // using the plugin!
 }, [
-	['css', CSSPlugin]
+  ['css', CSSPlugin]
 ]);
 ```
 
@@ -87,12 +87,12 @@ import EventPlugin from '@gui/plugin-event';
  * @param {Function} controller
  */
 export function summon(controller) {
-	return register(controller,  [
-		['att', AttPlugin], // working with attributes
-		['css', CSSPlugin], // working with classnames
-		['dom', DOMPlugin], // working with the DOM
-		['event', EventPlugin] // working with events
-	]);
+  return register(controller,  [
+    ['att', AttPlugin], // working with attributes
+    ['css', CSSPlugin], // working with classnames
+    ['dom', DOMPlugin], // working with the DOM
+    ['event', EventPlugin] // working with events
+  ]);
 }
 ```
 
@@ -120,10 +120,10 @@ summon('my-component', controller);
  * @param {Spirit} spirit
  */
 function controller({ att, css, dom, event }) {
-	att.set('my-attribute', 'my-value');
-	css.add('my-classname');
-	dom.text('Click me!');
-	event.onclick(() => alert('Clicked!'));
+  att.set('my-attribute', 'my-value');
+  css.add('my-classname');
+  dom.text('Click me!');
+  event.onclick(() => alert('Clicked!'));
 }
 ```
 
@@ -135,22 +135,22 @@ import import { summon } from './component';
 summon('my-component', controller);
 
 function controller({ att, spirit }) {
-	att.set('my-attribute', 'my-value');
-	updateCSS(spirit);
+  att.set('my-attribute', 'my-value');
+  updateCSS(spirit);
 }
 
 function updateCSS({ css, spirit }) {
-	css.add('my-classname');
-	updateDOM(spirit);
+  css.add('my-classname');
+  updateDOM(spirit);
 }
 
 function updateDOM({ dom, spirit }) {
-	dom.text('Click me!');
-	updateEvents(spirit);
+  dom.text('Click me!');
+  updateEvents(spirit);
 }
 
 function updateEvents({ event }) {
-	event.onclick(() => alert('Clicked!'));
+  event.onclick(() => alert('Clicked!'));
 }
 
 ```
@@ -165,8 +165,8 @@ Unlike with conventional web components, we don't have any code that gets execut
 
 ```js
 summon('my-component', ({ ondisconnect, onreconnect }) => {
-	ondisconnect(() => console.log('removed'));
-	onreconnect(() => console.log('inserted again'));
+  ondisconnect(() => console.log('removed'));
+  onreconnect(() => console.log('inserted again'));
 });
 ```
 
@@ -176,10 +176,10 @@ If the element is removed from the document structure and not re-inserted more o
 ```js
 summon('my-component', ({ onexorcise }) => {
     const i = setTimeout(fetchdata, 1000);
-	onexorcise(() => {
-	    console.log('removed for good');
-	    clearTimeout(i);
-	});
+  onexorcise(() => {
+      console.log('removed for good');
+      clearTimeout(i);
+  });
 });
 ```
 
