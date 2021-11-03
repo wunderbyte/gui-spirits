@@ -165,7 +165,7 @@ Unlike with conventional web components, we don't have any code that gets execut
 
 ```js
 summon('my-component', ({ ondisconnect, onreconnect }) => {
-	console.log('first detected in the DOM');
+  console.log('first detected in the DOM');
   ondisconnect(() => console.log('removed'));
   onreconnect(() => console.log('inserted again'));
 });
