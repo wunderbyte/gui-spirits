@@ -1,41 +1,48 @@
+# GUI Spirits
+GUI Spirits is the simplest [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) library you can imagine. It offers no new things to do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there's no `this` keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.
+
 ### Installation
-
-Not possible, since it isn't published anywhere.
-
-### What it is
-GUI Spirits is the simplest [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) library you can imagine. It offers no new things to do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there's also no `this` keyword to keep track of, no class hierarchy to maintain, no decorators, no private or static methods. Just functions.
-
-### What it's not
-It's not a "purely functional" thing going on.
+This library is unpublished, so you'll need to copy the `src` folder into your project and boot it up with a [monorepo manager](https://blog.bitsrc.io/11-tools-to-build-a-monorepo-in-2021-7ce904821cc2) since the folder contains multiple packages. Make sure to test in your oldest browser to see if you need Babel plugins or equivalent to support the syntax.
 
 ### Components
-
-The `summon` function registers a Custom Element with a callback function to invoke as soon as the element is found in the DOM. The callback recieves an object `spirit` as the single argument.
+The library exports a single function `summon` that will register a Custom Element with a callback function. This callback function  — hencforth known as the *controller function*  — gets invoked as soon as the element is found in the DOM. It recieves an object `spirit` as the single argument which has a property `element` that lets you handle the Custom Element.
 
 
 ```js
 import { summon } from '@gui/spirits';
-summon('my-component', (spirit) => {
+
+summon('my-component', function controller(spirit) {
 	spirit.element.classList.add('inserted');
 });
 ```
 
-The `spirit` has a property `element` that lets you handle the Custom Element. It also comes with some basic [lifecycle hooks](#lifecycle).
- 
- 
-### Interface
- 
+By returning an object, the element can expose methods and properties. Remember that the component must be document-connected before these methods become available.
 
- 
- That's bascially all there is to it. But you can enhance your workflow by collecting functionality in a *plugin*.
+
+```js
+summon('my-component', (spirit) => {
+	return {
+		toggle() {
+			element.classList.toggle('toggled');
+		},
+		get toggled() {
+			return element.classList.contains('toggled');
+		}
+	}
+});
+```
+
+The Spirit also provides some basic [lifecycle hooks](#lifecycle) and that's bascially all there is to it. Before you begin, you might choose to enhance your workflow by collecting related functionality in a *plugin*.
 
 
 ### Plugins
 
-Plugin are simply functions that takes the Custom Element as an argument and returns an interface to operate on it. Let's create a simple plugin to maintain CSS classnames. 
+Let's create a simple plugin to maintain CSS classnames. 
 
-
-```
+```js
+/**
+ * @param {CustomElement} element
+ */
 function CSSPlugin(element) {
 	return {
 		add(...names) {
@@ -51,7 +58,7 @@ function CSSPlugin(element) {
 }
 ```
 
-We'll register the plugin as a property of the `spirit` by passing an iterable to the `summon` method.
+Plugins are simply functions that takes the Custom Element as an argument and returns an interface to operate on it. We'll register the plugin as a property of the Spirit by passing an iterable to the `summon` method. Let's assign it to "css".
 
 
 ```js
@@ -62,7 +69,7 @@ summon('my-component', (spirit) => {
 ]);
 ```
 
-This of course becomes tedious to set up whenever we create a new component, so we will instead assign our plugins once and for all and reexport the `summon` method with all the plugins baked in. Plugins are instantiated [lazily](https://en.wikipedia.org/wiki/Lazy_initialization), so we can register as many as we like even if they are rarely used. Let's register some reference plugins to see how that might work.
+This of course becomes tedious to set up whenever we create a new component, so we will assign our plugins once and for all and reexport the `summon` method with all the plugins baked in. Plugins are instantiated [lazily](https://en.wikipedia.org/wiki/Lazy_initialization), so we can register as many plugins as we like even if they are rarely used. Let's see how that works with some reference plugins.
 
 
 ```js
@@ -72,6 +79,9 @@ import CSSPlugin from '@gui/plugin-css';
 import DOMPlugin from '@gui/plugin-dom';
 import EventPlugin from '@gui/plugin-event';
 
+/**
+ * @param {Function} controller
+ */
 export function summon(controller) {
 	return register(controller,  [
 		['att', AttPlugin], // working with attributes
@@ -82,7 +92,7 @@ export function summon(controller) {
 }
 ```
 
-Make sure to import the `summon` function from the new location.
+Once the file is saved, make sure to import the enhanced `summon` function from the new location.
 
 ```js
 import { summon } from './base-component';
@@ -91,13 +101,20 @@ summon('my-component', (spirit) => {
 });
 ```
 
+You can study the [plugin authoring guide](LINK!) before you create your first plugin, but let's first see how plugins can be used in real code.
+
+
 ### Destructuring
 
-You can [destructure](https://www.javascripttutorial.net/es6/javascript-object-destructuring/) the `spirit` for a nice and compact syntax.
+You can [destructure](https://www.javascripttutorial.net/es6/javascript-object-destructuring/) the Spirit like any other object for a nice and compact syntax.
 
 ```js
 summon('my-component', controller);
 
+/**
+ * Destructuring plugins.
+ * @param {Spirit} spirit
+ */
 function controller({ att, css, dom, event }) {
 	att.set('my-attribute', 'my-value');
 	css.add('my-classname');
@@ -106,7 +123,7 @@ function controller({ att, css, dom, event }) {
 }
 ```
 
-As the code grows, you'll want to split it into multiple functions. Fortunately, the spirit has a property `spirit` that points to the spirit itself. This facilitates *recursive destructuring* as seen below.
+As the code grows, you'll want to split this into multiple functions. To this purpose, the Spirit facilitates *recursive destructuring* via a property `spirit` that points to the Spirit itself. 
 
 ```js
 import import { summon } from './component';
@@ -133,20 +150,36 @@ function updateEvents({ event }) {
 }
 
 ```
-It's recommended to pass the whole `spirit` instead of a single plugin.
+
+Whenenver you create a new function, consider passing the whole Spirit instead of just any single plugin to keep them all at hand as the feature list grows.
+
 
 ### Lifecycle
  
-Unlike with conventional components, there is no code executed before the element is attached to the DOM. This means that the callback function used to register the component, let's call it the *controller function*, works much like the canonical `connectedCallback`. The `spirit` offers additional methods to detect whenever the elements gets moved around or removed for good.
+Unlike with conventional web components, we don't have any code that gets executed before the element is attached to the DOM. This guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null` under hard to fix conditions. This means that we don't need a special callback to detect when the element is first positioned in the DOM, the controller function does that for us. The spirit however exposes two methods to detect whenever the element gets *moved around* in the DOM.
+
 
 ```js
-summon('my-component', (spirit) => {
-	spirit.ondisconnect(() => console.log('removed'));
-	spirit.onreconnect(() => console.log('inserted again'));
-	spirit.onexorcise(() => console.log('removed for good'));
+summon('my-component', ({ ondisconnect, onreconnect }) => {
+	ondisconnect(() => console.log('removed'));
+	onreconnect(() => console.log('inserted again'));
 });
 ```
 
-* `ondisconnect` 
-* `onreconnect`
-* `onexorcise`
+If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. Fortunately, the spirit offers a callback to be executed just before this happens. This willl come in handy as an opportune moment to terminate whatever resource intensive operation the component  may have scheduled.
+
+
+```js
+summon('my-component', ({ onexorcise }) => {
+    const i = setTimeout(fetchdata, 1000);
+	onexorcise(() => {
+	    console.log('removed for good');
+	    clearTimeout(i);
+	});
+});
+```
+
+
+### Plugin guide
+
+TODO: Write short guide, remember `this` keyword and `onexorcise` method (and support `ondisconnect` and `onreconnect`). Also a note on inter-plugin communication.
