@@ -27,11 +27,11 @@ summon('my-component', function controller(spirit) {
 });
 ```
 
-The Custom Element can expose methods and properties. Note that the component must be document-connected before they become available.
+The Custom Element can expose methods and properties. Note that the component must be document-connected before these methods become available.
 
 
 ```js
-summon('my-component', (spirit) => {
+summon('my-component', ({ element }) => {
   return {
     toggle() {
       element.classList.toggle('toggled');
