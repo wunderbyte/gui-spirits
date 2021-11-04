@@ -16,7 +16,7 @@ npm run export ../myproject/mylibs/
 ```
 
 ### Components
-The library exports a single function `summon` that will register a Custom Element with a callback function. This callback function, let's call it the *controller function*, gets invoked as soon as the element is found in the DOM. It recieves an object `spirit` as the single argument with a property `element` that lets you handle the Custom Element.
+The library exports a single function `summon` that will register a Custom Element with a *controller function* to be invoked when the element is found in the DOM. The function recieves an object `spirit` with a property `element` that lets you handle the Custom Element.
 
 
 ```js
@@ -27,7 +27,7 @@ summon('my-component', function controller(spirit) {
 });
 ```
 
-By returning an object, the element can expose methods and properties. Remember that the component must be document-connected before these methods become available.
+By returning an object, the Custom Element can expose methods and properties. The component must be document-connected before these methods become available.
 
 
 ```js
@@ -43,7 +43,7 @@ summon('my-component', (spirit) => {
 });
 ```
 
-The Spirit also provides some basic [lifecycle hooks](#lifecycle) and that's bascially all there is to it. Before you begin, you might choose to enhance your workflow by collecting related functionality in a *plugin*.
+The Spirit also provides some basic [lifecycle hooks](#lifecycle) and that's bascially all there is to it. Before you begin, you can enhance your workflow by collecting related functionality in a *plugin* and you might want to take a look at our [reference plugins](WIKI).
 
 
 ### Plugins
