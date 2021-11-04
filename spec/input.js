@@ -1,4 +1,3 @@
-// GUI Spirits official plugins (third party)
 import AttPlugin from '@gui/plugin-att';
 import BoxPlugin from '@gui/plugin-box';
 import DOMPlugin from '@gui/plugin-dom';
