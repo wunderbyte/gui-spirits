@@ -181,11 +181,8 @@ These methods both return a function that you can invoke to cancel the callback.
 
 ```js
 summon('my-component', ({ onexorcise }) => {
-  const i = setTimeout(fetchdata, 1000);s
-  onexorcise(() => {
-  	console.log('removed for good');
-    clearTimeout(i);
-  });
+  const loop = setTimeout(myupdate, 1000);
+  onexorcise(() => clearTimeout(loop));
 });
 ```
 
