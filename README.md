@@ -1,10 +1,10 @@
-
+```console
  ██████  ██    ██ ██     ███████ ██████  ██ ██████  ██ ████████ ███████ 
 ██       ██    ██ ██     ██      ██   ██ ██ ██   ██ ██    ██    ██      
 ██   ███ ██    ██ ██     ███████ ██████  ██ ██████  ██    ██    ███████ 
 ██    ██ ██    ██ ██          ██ ██      ██ ██   ██ ██    ██         ██ 
  ██████   ██████  ██     ███████ ██      ██ ██   ██ ██    ██    ███████ 
-                                                                    
+```                                                                     
                                                                         
 **GUI Spirits** is the simplest [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) library you can imagine. It offers no new things to do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there's no `this` keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.
 
