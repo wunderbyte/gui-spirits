@@ -161,12 +161,12 @@ function updateEvents({ event }) {
 
 ```
 
-Whenenver you create a new function, consider passing the whole Spirit instead of just a single plugin. This will let you keep all your plugins at hand when you eventually need them later.
+Whenenver you create a new function, consider passing the whole Spirit instead of just a single plugin. This will let you keep all your plugins at hand when you undoubtedly need them later.
 
 
 ### Lifecycle
  
-We never execute any code before the element is attached to the DOM. This convention guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when the element is first positioned in the DOM, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
+We never execute any code before the element is attached to the DOM since this convention guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when the element is first positioned in the DOM, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
 
 
 ```js
