@@ -1,4 +1,4 @@
-import { Spirit, disconnect, reconnect, exorcise } from './Spirit';
+import { Spirit, detach, attach, exorcise } from './Spirit';
 import { expand } from './SpiritInterface';
 
 /**
@@ -18,14 +18,14 @@ export default function (controller, plugins, prod) {
 		connectedCallback() {
 			if (this.#spirit) {
 				this.#moved
-					? this.#spirit[reconnect]()
+					? this.#spirit[attach]()
 					: expand(this, controller(this.#spirit) || {}, prod);
 			}
 		}
 		disconnectedCallback() {
 			if (this.#spirit) {
 				this.#moved = true;
-				this.#spirit[disconnect]();
+				this.#spirit[detach]();
 				didexit(this).then((exit) => {
 					if (exit) {
 						this.#spirit[exorcise]();

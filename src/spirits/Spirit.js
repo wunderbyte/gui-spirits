@@ -2,7 +2,7 @@ import { addCallback, runCallbacks, nonCallbacks } from '@gui/callback-utils';
 import { plugin, unplug } from './SpiritPlugins';
 import { frozen } from './SpiritUtils';
 
-export const [disconnect, reconnect, exorcise] = [Symbol(), Symbol(), Symbol()];
+export const [detach, attach, exorcise] = [Symbol(), Symbol(), Symbol()];
 
 /**
  * @param {CustomElement} element
@@ -49,14 +49,14 @@ function spirit(element, accessed) {
 		/**
 		 * Disconnect spirit.
 		 */
-		[disconnect]() {
+		[detach]() {
 			runCallbacks(set1);
 		},
 
 		/**
 		 * Reconnect spirit.
 		 */
-		[reconnect]() {
+		[attach]() {
 			runCallbacks(set2);
 		},
 
@@ -70,20 +70,20 @@ function spirit(element, accessed) {
 		},
 
 		/**
-		 * Add disconnect callback and return function to remove the callback.
+		 * Add detach callback and return function to remove the callback.
 		 * @param {Function} cb
 		 * @returns {Function}
 		 */
-		ondisconnect(cb) {
+		ondetach(cb) {
 			return addCallback(cb, (set1 = set1 || new Set()));
 		},
 
 		/**
-		 * Add reconnect callback and return function to remove the callback.
+		 * Add attach callback and return function to remove the callback.
 		 * @param {Function} cb
 		 * @returns {Function}
 		 */
-		onreconnect(cb) {
+		onattach(cb) {
 			return addCallback(cb, (set2 = set2 || new Set()));
 		},
 

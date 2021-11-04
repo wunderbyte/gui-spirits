@@ -16,18 +16,18 @@ npm run export ../myproject/mylibs/
 ```
 
 ### Components
-The library exports a single function `summon` that will register a Custom Element with a *controller function* to be invoked when the element is found in the DOM. The function recieves an object `spirit` with a property `element` that lets you handle the Custom Element.
+The library exports a single function `summon` that will register a Custom Element with a *possessor function* to be invoked when the element is found in the DOM. The function recieves an object `spirit` with a property `element` that lets you handle the Custom Element.
 
 
 ```js
 import { summon } from '@gui/spirits';
 
-summon('my-component', function controller(spirit) {
+summon('my-component', function possess(spirit) {
   spirit.element.classList.add('inserted');
 });
 ```
 
-The Custom Element can expose methods and properties. Note that the component must be document-connected before these methods become available.
+The Custom Element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.
 
 
 ```js
@@ -90,10 +90,10 @@ import DOMPlugin from '@gui/plugin-dom';
 import EventPlugin from '@gui/plugin-event';
 
 /**
- * @param {Function} controller
+ * @param {Function} possessor
  */
-export function summon(controller) {
-  return register(controller,  [
+export function summon(possessor) {
+  return register(possessor,  [
     ['att', AttPlugin], // working with attributes
     ['css', CSSPlugin], // working with classnames
     ['dom', DOMPlugin], // working with the DOM
@@ -119,13 +119,13 @@ You can study the [plugin authoring guide](LINK!) before you create your first p
 You can [destructure](https://www.javascripttutorial.net/es6/javascript-object-destructuring/) the Spirit like any other object for a nice and compact syntax.
 
 ```js
-summon('my-component', controller);
+summon('my-component', possess);
 
 /**
  * Destructuring plugins.
  * @param {Spirit} spirit
  */
-function controller({ att, css, dom, event }) {
+function possess({ att, css, dom, event }) {
   att.set('my-attribute', 'my-value');
   css.add('my-classname');
   dom.text('Click me!');
@@ -138,9 +138,9 @@ As the code grows, you'll want to split this into multiple functions. To this pu
 ```js
 import { summon } from './base-component';
 
-summon('my-component', controller);
+summon('my-component', possess);
 
-function controller({ att, spirit }) {
+function possess({ att, spirit }) {
   att.set('my-attribute', 'my-value');
   updateCSS(spirit);
 }
@@ -161,28 +161,27 @@ function updateEvents({ event }) {
 
 ```
 
-Whenenver you create a new function, consider passing the whole Spirit instead of just a single plugin. This will let you keep all your plugins at hand as the feature list grows.
+Whenenver you create a new function, consider passing the whole Spirit instead of just a single plugin. This will let you keep all your plugins at hand when you eventually need them later.
 
 
 ### Lifecycle
  
-Code never gets executed before the element is attached to the DOM. This convention guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when the element is first positioned in the DOM, the controller function simply does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
+We never execute any code before the element is attached to the DOM. This convention guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when the element is first positioned in the DOM, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
 
 
 ```js
-summon('my-component', ({ ondisconnect, onreconnect }) => {
+summon('my-component', ({ ondetach, onattach }) => {
   console.log('first detected in the DOM');
-  ondisconnect(() => console.log('removed'));
-  onreconnect(() => console.log('inserted again'));
+  ondetach(() => console.log('removed'));
+  onattach(() => console.log('inserted again'));
 });
 ```
-
-If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happens and this willl come in handy to terminate whatever resource intensive operation the component  may have scheduled.
+These methods both return a function that you can invoke to cancel the callback. If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happens and this is an an opportune moment to terminate whatever resource intensive operation the component  may have scheduled.
 
 
 ```js
 summon('my-component', ({ onexorcise }) => {
-  const i = setTimeout(fetchdata, 1000);
+  const i = setTimeout(fetchdata, 1000);s
   onexorcise(() => {
   	console.log('removed for good');
     clearTimeout(i);
@@ -192,4 +191,10 @@ summon('my-component', ({ onexorcise }) => {
 
 
 ### Plugin guide
-TODO: Write short guide. Remember `this` keyword to support destructuring. Remember `onexorcise` method (and support `ondisconnect` and `onreconnect`). Also a note on inter-plugin communication.
+TODO: Write short guide. Remember `this` keyword to support destructuring. Remember `onexorcise` method (and support `ondetach` and `onattach`). Also a note on inter-plugin communication.
+
+### General guide
+TODO: Short introduction to higher order functions.
+
+### Enterprise mode
+TODO: Implmenent and document "enterprise mode" to obscure the occult terminology going on with spirits and possesion and what not.
