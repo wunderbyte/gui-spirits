@@ -27,7 +27,7 @@ summon('my-component', function possess(spirit) {
 });
 ```
 
-The spirit is hidden from the outside world, but the Custom Element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.
+The spirit is hidden from the outside world, but the element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.
 
 
 ```js
@@ -177,7 +177,7 @@ summon('my-component', ({ ondetach, onattach }) => {
 });
 ```
 
-Both methods return a function that you can invoke to cancel the callback. If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happens. This is an an opportune moment to terminate whatever resource intensive operation the component  may have scheduled.
+Both methods return a function that you can invoke to cancel the callback. If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happen and this is an an opportune moment to terminate whatever resource intensive operation the component  may have scheduled.
 
 
 ```js
