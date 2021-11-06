@@ -66,6 +66,7 @@ export default function AttPlugin(elm) {
 		},
 
 		/**
+		 * TODO: This should run the callback straight away (optional skip)!
 		 * Add attribute listener(s). Until the {MutationObserver} interface
 		 * supports an `unobserve` method, we're gonna have to use an unique
 		 * observer for each single element in order to prevent memory leaks.
@@ -137,7 +138,7 @@ function add(elm, map, name, cb) {
 		(elm[onchange] = (name) => {
 			map.has(name) &&
 				map.get(name).forEach((cb) => {
-					cb(cast(elm.getAttribute(name)));
+					cb(cast(elm.getAttribute(name)), name);
 				});
 		});
 }
