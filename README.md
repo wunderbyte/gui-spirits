@@ -6,10 +6,10 @@
  ██████   ██████  ██     ███████ ██      ██ ██   ██ ██    ██    ███████ 
 ```                                                                     
                                                                         
-**GUI Spirits** is the simplest [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) library you can imagine. It offers no new things to do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there is no `this` keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.
+**GUI Spirits** is the simplest [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) library you can imagine. It offers no new things you can do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there is no `this` keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.
 
 ### Installation
-This library is unpublished, so you'll need to copy the `src` folder into your project and boot it up with a [monorepo manager](https://blog.bitsrc.io/11-tools-to-build-a-monorepo-in-2021-7ce904821cc2) since the folder contains multiple packages. Make sure to test in your oldest browser to see if you need Babel plugins or equivalent to support the syntax. There's an NPM script that can copy the files for you.
+This library is unpublished, so you'll need to copy the `src` folder into your project and boot it up with a [monorepo manager](https://blog.bitsrc.io/11-tools-to-build-a-monorepo-in-2021-7ce904821cc2) since the folder contains multiple packages. Make sure to test in your oldest browser to see if you need Babel plugins or equivalent to support the syntax. There's an NPM script that can exports the files for you.
 
 ```console
 npm run export ../myproject/mylibs/
@@ -43,7 +43,7 @@ summon('my-component', ({ element }) => {
 });
 ```
 
-The Spirit also provides some basic [lifecycle hooks](#lifecycle) and that's bascially all there is to it. You can enhance your workflow by collecting related functionality in a *plugin* and you might also want to take a look at our [reference plugins](WIKI).
+The Spirit also provides some basic [lifecycle hooks](#lifecycle) and that's bascially all there is to it. You can enhance your workflow by collecting related functionality in a *plugin* and you might also want to take a look at some [reference plugins](./wiki).
 
 ### Plugins
 
@@ -68,7 +68,7 @@ function CSSPlugin(element) {
 }
 ```
 
-Plugins are simply functions that takes the Custom Element as an argument and returns an interface to operate on it. We'll register the plugin as a property of the Spirit by passing an iterable to the `summon` method. Let's assign it to "css".
+Plugins are simply functions that takes the Custom Element as an argument and returns an interface to operate on it. We'll register the plugin as a property of the Spirit by passing an iterable to the `summon` method. Let's assign it to the property name `css`.
 
 
 ```js
@@ -79,7 +79,7 @@ summon('my-component', (spirit) => {
 ]);
 ```
 
-This of course becomes tedious to set up whenever we create a new component, so we will assign our plugins once and for all and reexport the `summon` method with all the plugins baked in. Plugins are instantiated [lazily](https://en.wikipedia.org/wiki/Lazy_initialization), so we can register as many plugins as we like even if they are rarely used. Let's see how that works with some [reference plugins](WIKI).
+This of course becomes tedious to set up whenever we create a new component, so we will assign our plugins once and for all and reexport the `summon` method with all the plugins baked in. Plugins are instantiated [lazily](https://en.wikipedia.org/wiki/Lazy_initialization), so we can register as many plugins as we like even if they are rarely used. Let's see how that works with some [reference plugins](./wiki).
 
 
 ```js
@@ -161,7 +161,7 @@ function updateEvents({ event }) {
 
 ```
 
-Whenenver you create a new function, consider passing the whole Spirit instead of just a single plugin. This will let you keep all your plugins at hand when you undoubtedly need them later.
+Whenenver you create a new function, consider passing the whole Spirit instead of just a single plugin. This will let you keep all your plugins at hand when you need them later.
 
 
 ### Lifecycle
@@ -176,7 +176,8 @@ summon('my-component', ({ ondetach, onattach }) => {
   onattach(() => console.log('inserted again'));
 });
 ```
-These methods both return a function that you can invoke to cancel the callback. If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happens and this is an an opportune moment to terminate whatever resource intensive operation the component  may have scheduled.
+
+Both methods return a function that you can invoke to cancel the callback. If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happens. This is an an opportune moment to terminate whatever resource intensive operation the component  may have scheduled.
 
 
 ```js
@@ -186,7 +187,6 @@ summon('my-component', ({ onexorcise }) => {
 });
 ```
 
-
 ### Plugin guide
 TODO: Write short guide. Remember `this` keyword to support destructuring. Remember `onexorcise` method (and support `ondetach` and `onattach`). Also a note on inter-plugin communication.
 
@@ -194,4 +194,4 @@ TODO: Write short guide. Remember `this` keyword to support destructuring. Remem
 TODO: Short introduction to higher order functions.
 
 ### Enterprise mode
-TODO: Implmenent and document "enterprise mode" to obscure the occult terminology going on with spirits and possesion and what not.
+TODO: Implement and document "enterprise mode" to obscure the occult terminology going on with spirits and possesion and what not.
