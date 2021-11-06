@@ -4,14 +4,15 @@
   "scripts": {
     "boot": "lerna bootstrap",
     "prettier": "npm run prettier:js && npm run prettier:json",
-    "prettier:js": "prettier --write '{src,spec}/**/*.{js,mjs}' --ignore-path .prettierignore",
-    "prettier:json": "prettier --write '{src,spec}/*/package.json' 'package.json'",
+    "prettier:js": "prettier --write '{src,spec,tasks}/**/*.{js,mjs}' --ignore-path .prettierignore",
+    "prettier:json": "prettier --write '{src,spec,tasks}/*/package.json' 'package.json'",
     "clean": "npm run clean:lerna && npm run clean:npm",
     "clean:lerna": "lerna clean",
     "clean:npm": "npm run clean:npm:unlock && npm run clean:npm:uninstall",
     "clean:npm:unlock": "find . -name \"package-lock.json\" -not -path \"./node_modules/*\" -delete && echo \"package-lock.json files removed!\"",
     "clean:npm:uninstall": "rm -rf `find -type d -name node_modules` && echo \"node_modules folders removed!\"",
     "export": "node --unhandled-rejections=strict tasks/export.mjs",
+    "publish": "node --unhandled-rejections=strict tasks/publish.mjs",
     "test": "npm run boot && concurrently \"npm run test:build\" \"npm run test:serve\"",
     "test:build": "esbuild spec/input.js --format=esm --target=chrome93,firefox93,safari15 --bundle --watch --outfile=spec/output.mjs",
     "test:serve": "npx jasmine-browser-runner serve"

@@ -4,36 +4,36 @@ import { join } from 'path';
 
 /**
  * @filedesc
- * Export modules to external directory for use in foreign project without 
- * involving NPM publishing or Git submodules. Note that our foreign project 
+ * Export modules to external directory for use in foreign project without
+ * involving NPM publishing or Git submodules. Note that our foreign project
  * is now in charge of *transpiling* the code for use in older user agents!
  */
 
 /**
  * @param {string} source
- * @returns {Array<string>} 
+ * @returns {Array<string>}
  */
 function getDirectories(source) {
 	return readdirSync(source, { withFileTypes: true })
-		.filter(dirent => dirent.isDirectory())
-		.map(dirent => join(source, dirent.name));
+		.filter((dirent) => dirent.isDirectory())
+		.map((dirent) => join(source, dirent.name));
 }
 
 /**
- * @param {string} target 
- * @param {Array<string>} dirs 
+ * @param {string} target
+ * @param {Array<string>} dirs
  */
 function run(target, dirs) {
 	target
 		? existsSync(target)
 			? traverse(target, dirs)
 			: console.error('Target not found', target)
-		: console.error('Target directory required')
+		: console.error('Target directory required');
 }
 
 /**
- * @param {string} target 
- * @param {Array<string>} dirs 
+ * @param {string} target
+ * @param {Array<string>} dirs
  */
 function traverse(target, dirs) {
 	Promise.all(dirs.map(namepair).map(copydir(target)))
@@ -44,8 +44,8 @@ function traverse(target, dirs) {
 }
 
 /**
- * @param {string} dir 
- * @returns {Array<string>} 
+ * @param {string} dir
+ * @returns {Array<string>}
  */
 function namepair(dir) {
 	const json = readFileSync(dir + '/package.json');
@@ -54,18 +54,19 @@ function namepair(dir) {
 }
 
 /**
- * @param {string} target 
+ * @param {string} target
  * @returns {Function}
  */
 function copydir(target) {
-	return ([name, dir]) => fsextras.copy(dir, join(target, name), {
-			filter: (src) => !src.includes('node_modules')
+	return ([name, dir]) =>
+		fsextras.copy(dir, join(target, name), {
+			filter: (src) => !src.includes('node_modules'),
 		});
 }
 
 /**
- * @param {string} name 
- * @param {string} target 
+ * @param {string} name
+ * @param {string} target
  * @returns {Promise}
  */
 function copyfile(name, target) {
@@ -73,8 +74,8 @@ function copyfile(name, target) {
 }
 
 /**
- * @param {string} target 
- * @param {Array<string>} dirs 
+ * @param {string} target
+ * @param {Array<string>} dirs
  */
 function success(target, dirs) {
 	console.log(`${dirs.length} modules exported into ${target}`);
