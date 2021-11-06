@@ -27,7 +27,7 @@ summon('my-component', function possess(spirit) {
 });
 ```
 
-The spirit is hidden from the outside world, but the element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.
+The element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.
 
 
 ```js
@@ -43,7 +43,7 @@ summon('my-component', ({ element }) => {
 });
 ```
 
-The Spirit also provides some basic [lifecycle hooks](#lifecycle) and that's bascially all there is to it. You can enhance your workflow by collecting related functionality in a *plugin* and you might also want to take a look at some [reference plugins](./wiki).
+The Spirit also provides some basic [lifecycle hooks](#lifecycle) and that's bascially all there is to it. You can enhance your workflow by collecting related functionality in a *plugin* and you might also want to take a look at some [reference plugins](wiki).
 
 ### Plugins
 
@@ -68,7 +68,7 @@ function CSSPlugin(element) {
 }
 ```
 
-Plugins are simply functions that takes the Custom Element as an argument and returns an interface to operate on it. We'll register the plugin as a property of the Spirit by passing an iterable to the `summon` method. Let's assign it to the property name `css`.
+Plugins are simply functions that takes the element as an argument and returns an interface to operate on it. We'll register the plugin as a property of the Spirit by passing an iterable to the `summon` method. Let's assign it to the property name `css`.
 
 
 ```js
@@ -79,7 +79,7 @@ summon('my-component', (spirit) => {
 ]);
 ```
 
-This of course becomes tedious to set up whenever we create a new component, so we will assign our plugins once and for all and reexport the `summon` method with all the plugins baked in. Plugins are instantiated [lazily](https://en.wikipedia.org/wiki/Lazy_initialization), so we can register as many plugins as we like even if they are rarely used. Let's see how that works with some [reference plugins](./wiki).
+This of course becomes tedious to set up whenever we create a new component, so we will assign our plugins once and for all and reexport the `summon` method with all the plugins baked in. Plugins are instantiated [lazily](https://en.wikipedia.org/wiki/Lazy_initialization), so we can register as many plugins as we like even if they are rarely used. Let's see how that works with some [reference plugins](wiki).
 
 
 ```js
@@ -166,7 +166,7 @@ Whenenver you create a new function, consider passing the whole Spirit instead o
 
 ### Lifecycle
  
-We never execute any code before the element is attached to the DOM since this convention guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when the element is first positioned in the DOM, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
+We never execute any code before the element is attached to the DOM. This convention guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when this happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
 
 
 ```js
@@ -177,7 +177,9 @@ summon('my-component', ({ ondetach, onattach }) => {
 });
 ```
 
-Both methods return a function that you can invoke to cancel the callback. If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happen and this is an an opportune moment to terminate whatever resource intensive operation the component  may have scheduled.
+These methods both return a function that you can invoke to cancel the callback.
+
+If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently *exorcised*. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happen and this is an an opportune moment to terminate whatever resource intensive operation the component may have scheduled.
 
 
 ```js
