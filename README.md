@@ -27,7 +27,7 @@ summon('my-component', function possess(spirit) {
 });
 ```
 
-The Custom Element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.
+The spirit is hidden from the outside world, but the Custom Element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.
 
 
 ```js
