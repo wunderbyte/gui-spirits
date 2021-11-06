@@ -1,12 +1,11 @@
 {
   "name": "gui-spirits",
   "version": "0.0.0",
-  "module": "dist/index.js",
   "scripts": {
     "boot": "lerna bootstrap",
     "prettier": "npm run prettier:js && npm run prettier:json",
-    "prettier:js": "prettier --write '{src,test}/**/*.{js,mjs}' --ignore-path .prettierignore",
-    "prettier:json": "prettier --write '{src,test}/*/package.json' 'package.json'",
+    "prettier:js": "prettier --write '{src,spec}/**/*.{js,mjs}' --ignore-path .prettierignore",
+    "prettier:json": "prettier --write '{src,spec}/*/package.json' 'package.json'",
     "clean": "npm run clean:lerna && npm run clean:npm",
     "clean:lerna": "lerna clean",
     "clean:npm": "npm run clean:npm:unlock && npm run clean:npm:uninstall",
@@ -17,11 +16,6 @@
     "test:build": "esbuild spec/input.js --format=esm --target=chrome93,firefox93,safari15 --bundle --watch --outfile=spec/output.mjs",
     "test:serve": "npx jasmine-browser-runner serve"
   },
-  "browserslist": [
-    "last 1 Firefox versions",
-    "last 1 Chrome versions",
-    "last 1 Safari versions"
-  ],
   "devDependencies": {
     "concurrently": "^6.3.0",
     "esbuild": "^0.13.8",
