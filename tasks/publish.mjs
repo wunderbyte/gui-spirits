@@ -71,9 +71,10 @@ function template(markup, level) {
 	<head>
 		<title>TODO</title>
 		<meta charset="UTF-8"/>
+		<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="icon" type="image/gif" href="data:image/gif;base64,data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw"/>
 		<link rel="stylesheet" href="${up}index.css"/>
 		<script type="module" src="${up}index.js"></script>
-		<link rel="icon" type="image/gif" href="data:image/gif;base64,data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw"/>
 	</head>
 	<body>
 		<article>${markup}</article>
