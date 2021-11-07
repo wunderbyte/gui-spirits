@@ -9,7 +9,7 @@
 **GUI Spirits** is the simplest [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) library you can imagine. It offers no new things you can do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there is no `this` keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.
 
 ### Installation
-This library is unpublished, so you'll need to copy the `src` folder into your project and boot it up with a [monorepo manager](https://blog.bitsrc.io/11-tools-to-build-a-monorepo-in-2021-7ce904821cc2) since the folder contains multiple packages. Make sure to test in your oldest browser to see if you need Babel plugins or equivalent to support the syntax. There's an NPM script that can exports the files for you.
+This library is yet unpublished, so you'll need to copy the `src` folder into your project and boot it up with a [monorepo manager](https://blog.bitsrc.io/11-tools-to-build-a-monorepo-in-2021-7ce904821cc2) since the folder contains multiple packages. Make sure to test in your oldest browser to see if you need Babel plugins or equivalent to support the syntax. There's an NPM script that can exports the files for you.
 
 ```console
 npm run export ../myproject/mylibs/
@@ -21,7 +21,6 @@ The library exports a single function `summon` that will register a Custom Eleme
 
 ```js
 import { summon } from '@gui/spirits';
-
 summon('my-component', function possess(spirit) {
   spirit.element.classList.add('inserted');
 });
@@ -184,8 +183,8 @@ If the element is removed from the document structure and not re-inserted more o
 
 ```js
 summon('my-component', ({ onexorcise }) => {
-  const loop = setTimeout(myupdate, 1000);
-  onexorcise(() => clearTimeout(loop));
+  const loop = setInterval(myupdate, 1000);
+  onexorcise(() => clearInterval(loop));
 });
 ```
 

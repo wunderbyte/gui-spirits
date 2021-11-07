@@ -1,70 +1,77 @@
-import { promises } from 'fs';
+import MarkdownIt from 'markdown-it';
+import prism from 'markdown-it-prism';
+import { readdirSync, rmSync, promises } from 'fs';
 import { join, extname } from 'path';
-
-/*
-promises.rm('docs/public', { recursive: true })
-	.then(() => promises.mkdir('docs/public', { recursive: true }))
-	.then(() => run('docs', 'docs/public'))
-	.then(() => console.log('OK'));
-*/
-
-const docs = (node) => extname(node.name) === '.md';
-const files = (nodes) => nodes.filter((node) => node.isFile());
-const folders = (nodes) => nodes.filter((node) => node.isDirectory());
-const nodes = (dir) => promises.readdir(dir, { withFileTypes: true });
+import { outputFile } from 'fs-extra';
 
 /**
+ * Cleanup traces of previous build by
+ * deleting all folders and HTML files.
  * @param {string} source
  * @param {string} target
  * @returns {Promise}
  */
-function run(source, target) {
-	return new Promise((resolve) => {
-		nodes(source)
-			.then(publishAll(source, target))
-			.then(recurseAll(source, target))
-			.then(resolve);
-	});
-}
+(function cleanup(target) {
+	readdirSync(target, { withFileTypes: true })
+		.filter((node) => node.isDirectory() || extname(node.name) === '.html')
+		.forEach((node) => rmSync(join(target, node.name), { recursive: true }));
+})('docs/public');
+
+/**
+ *
+ * @param {string} source
+ * @param {string} target
+ * @returns {Promise}
+ */
+(function recurse(source, target, level = 0) {
+	const nodes = readdirSync(source, { withFileTypes: true });
+	nodes
+		.filter((node) => node.isFile())
+		.filter((node) => extname(node.name) === '.md')
+		.forEach(publish(source, target, level));
+	nodes
+		.filter((node) => node.isDirectory())
+		.filter((node) => node.name !== 'public')
+		.forEach((node) => {
+			recurse(join(source, node.name), join(target, node.name), level + 1);
+		});
+})('docs', 'docs/public');
 
 /**
  * @param {string} source
  * @param {string} target
+ * @param {number} level
  * @returns {Function}
  */
-function publishAll(source, target) {
-	return async (nodes) => {
-		await Promise.all(
-			files(nodes).filter(docs).map(publishOne(source, target))
-		);
-		return nodes;
-	};
+function publish(source, target, level) {
+	const md = new MarkdownIt().use(prism);
+	return (node) =>
+		promises
+			.readFile(join(source, node.name))
+			.then(String)
+			.then((markdown) =>
+				outputFile(
+					join(target, node.name.replace('.md', '.html')),
+					template(md.render(markdown), level).trim()
+				)
+			);
 }
 
-/**
- * @param {string} source
- * @param {string} target
- * @returns {Function}
- */
-function publishOne(source, target) {
-	return async (node) => console.log(node.name, source, target);
-}
-
-/**
- * @param {string} source
- * @param {string} target
- * @returns {Function}
- */
-function recurseAll(source, target) {
-	return async (nodes) =>
-		await Promise.all(folders(nodes).map(recurseOne(source, target)));
-}
-
-/**
- * @param {string} source
- * @param {string} target
- * @returns {Function}
- */
-function recurseOne(source, target) {
-	return async ({ name }) => await run(join(source, name), join(target, name));
+function template(markup, level) {
+	const up = new Array(level).fill('../').join('');
+	return `
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TODO</title>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="${up}index.css"/>
+		<script type="module" src="${up}index.js"></script>
+		<link rel="icon" type="image/gif" href="data:image/gif;base64,data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw"/>
+	</head>
+	<body>
+		<article>${markup}</article>
+	</body>
+</html>
+`;
 }

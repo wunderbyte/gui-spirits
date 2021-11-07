@@ -4,7 +4,7 @@
   "scripts": {
     "boot": "lerna bootstrap",
     "prettier": "npm run prettier:js && npm run prettier:json",
-    "prettier:js": "prettier --write '{src,spec,tasks}/**/*.{js,mjs}' --ignore-path .prettierignore",
+    "prettier:js": "prettier --write '{src,spec,tasks,docs}/**/*.{js,mjs}' --ignore-path .prettierignore",
     "prettier:json": "prettier --write '{src,spec,tasks}/*/package.json' 'package.json'",
     "clean": "npm run clean:lerna && npm run clean:npm",
     "clean:lerna": "lerna clean",
@@ -12,16 +12,24 @@
     "clean:npm:unlock": "find . -name \"package-lock.json\" -not -path \"./node_modules/*\" -delete && echo \"package-lock.json files removed!\"",
     "clean:npm:uninstall": "rm -rf `find -type d -name node_modules` && echo \"node_modules folders removed!\"",
     "export": "node --unhandled-rejections=strict tasks/export.mjs",
-    "publish": "node --unhandled-rejections=strict tasks/publish.mjs",
     "test": "npm run boot && concurrently \"npm run test:build\" \"npm run test:serve\"",
     "test:build": "esbuild spec/input.js --format=esm --target=chrome93,firefox93,safari15 --bundle --watch --outfile=spec/output.mjs",
-    "test:serve": "npx jasmine-browser-runner serve"
+    "test:serve": "npx jasmine-browser-runner serve",
+    "docs": "npm run boot && concurrently \"npm run docs:build\" \"npm run docs:serve\" \"npm run docs:watch\"",
+    "docs:build": "node --unhandled-rejections=strict tasks/publish.mjs",
+    "docs:serve": "es-dev-server --app-index docs/public/index.html --watch --open",
+    "docs:watch": "chokidar 'docs/**/*.md' 'docs/public/index.js' 'docs/public/index.css' -c 'npm run docs:build'"
   },
   "devDependencies": {
+    "@popeindustries/lit-html-server": "^3.1.0",
+    "chokidar-cli": "^3.0.0",
     "concurrently": "^6.3.0",
+    "es-dev-server": "^2.1.0",
     "esbuild": "^0.13.8",
     "jasmine-browser-runner": "^0.9.0",
     "lerna": "^4.0.0",
+    "markdown-it": "^12.2.0",
+    "markdown-it-prism": "^2.2.1",
     "prettier": "^2.0.5"
   }
 }

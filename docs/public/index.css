@@ -1,0 +1,309 @@
+@font-face {
+  font-family: 'Cutive Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('https://fonts.gstatic.com/s/cutivemono/v9/m8JWjfRfY7WVjVi2E-K9H6RCTm4.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Waiting for the Sunrise';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('https://fonts.gstatic.com/s/waitingforthesunrise/v11/WBL1rFvOYl9CEv2i1mO6KUW8RKWJ2zoXoz5JsbZX_B4.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: block;
+  src: url('https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_7Pq_ROW4.woff2') format('woff2');
+}
+
+
+:root {
+  --color-paper: hsl(52.5,80%,98%);
+  --color-type: hsl(30,50%,3%);
+  --color-type-smear: hsla(30,50%,3%,0.4);
+  --color-type-smear: #ba9c7d;
+  --color-type-smear: #bda891;
+  --color-pen: hsl(225,45%,41%);
+  --color-pen-smear: hsla(225,45%,41%,0.25);
+  --color-bold: hsla(0,100%,32%,0.85);
+  --color-bold-smear: hsla(0,100%,32%,0.35);
+  --color-marker: hsla(60,98%,53%);
+}
+*:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
+  all: unset;
+  display: revert;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+*::selection {
+	background-color: var(--color-marker);
+  color: var(--color-type);
+}
+html {
+	font-size: clamp(16px, 1.3vw, 24px);
+}
+body {
+  background-color: var(--color-paper);
+  color: var(--color-type);
+	font-family: 'Cutive Mono', monospace;
+  letter-spacing: -1px;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	font-weight: 400;
+	hyphens: auto;
+  padding: 6vw;
+  padding-bottom: 9vw;
+}
+article {
+	max-width: 74ch;
+	margin: 0 auto;
+}
+p,
+ol,
+ul, 
+pre {
+  margin-bottom: 2rem;
+}
+ol, ul {
+  list-style: none;
+}
+ul li {
+  display: block;
+  padding-left: 1em;
+  position: relative;
+}
+ul li:before {
+  content: '*';
+  color: var(--color-bold);
+  text-shadow: 0 0 1px var(--color-bold-smear);
+  vertical-align: bottom;
+  position: absolute;
+  top: 0.15em;
+  left: 0;
+}
+/*
+h1 {
+  margin-bottom: min(3rem, 6vw);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--color-bold);
+  text-shadow: 0 0 1px var(--color-bold-smear);
+}
+h1:after {
+  content: '-----------------------------';
+  display: block;
+  line-height: 1em;
+}
+*/
+h3 {
+	font-family: 'Roboto Mono', monospace;
+	font-weight: 500;
+	font-size: 0.8em;
+	letter-spacing: 1px;
+	margin: 2rem 0 1.5rem 0;
+	text-transform: uppercase;
+	text-shadow: 0 0 1px var(--color-bold-smear);
+	display: table;
+	background-color: var(--color-type);
+	color: white;
+	padding: 0 1.2em 0.1em 0.6em;
+}
+p:last-of-type {
+  font-family: 'Waiting for the Sunrise', sans-serif;
+  font-weight: 400;
+  font-size: 1.7rem;
+  margin-top: 2.5em;
+  text-align: right;
+  padding-right: 6vw;
+  transform: rotate(-1.5deg);
+  transform-origin: right center;
+  color: var(--color-pen);
+  text-shadow: 0 0 2px var(--color-pen-smear);
+  letter-spacing: 0;
+}
+a {
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-position: under;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--color-type-smear);
+}
+a:hover {
+  background-color: var(--color-marker);
+}
+strong {
+  font-weight: 600;
+}
+em {
+  font-weight: 600;
+  font-style: normal;
+}
+picture,
+img {
+  width: 100%;
+  display: block;
+}
+picture {
+  mix-blend-mode: multiply;
+  transform: scaleX(-1);
+}
+figure {
+  margin: 3em 0;
+}
+
+/* Breakpoints .............................................................. */
+
+/*
+@media (min-width: 900px) {
+  article {
+    position: relative;
+    left: -7vw;
+  }
+  h1 {
+    text-indent: -0.6em;
+  }
+}
+*/
+
+/* PrismJS 1.25.0
+https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+css+clike+javascript */
+/*
+ Solarized Color Schemes originally by Ethan Schoonover
+ http://ethanschoonover.com/solarized
+
+ Ported for PrismJS by Hector Matos
+ Website: https://krakendev.io
+ Twitter Handle: https://twitter.com/allonsykraken)
+*/
+
+/*
+SOLARIZED HEX
+--------- -------
+base03    #002b36
+base02    #073642
+base01    #586e75
+base00    #657b83
+base0     #839496
+base1     #93a1a1
+base2     #eee8d5
+base3     #fdf6e3
+yellow    #b58900
+orange    #cb4b16
+red       #dc322f
+magenta   #d33682
+violet    #6c71c4
+blue      #268bd2
+cyan      #2aa198
+green     #859900
+*/
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #657b83; /* base00 */
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	tab-size: 4;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	overflow: auto;
+	padding-left: 1em;
+	/*
+	font-size: 0.8em;
+	line-height: calc(1.5rem * 0.8);
+	*/
+	border-left: 1px solid #93a1a1 /* base1 */;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background-color: #fdf6e3; /* base3 */
+	background-color: transparent;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #93a1a1; /* base1 */
+}
+
+.token.punctuation {
+	color: #586e75; /* base01 */
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #268bd2; /* blue */
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.url,
+.token.inserted {
+	color: #2aa198; /* cyan */
+}
+
+.token.entity {
+	color: #657b83; /* base00 */
+	background: #eee8d5; /* base2 */
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #859900; /* green */
+}
+
+.token.function,
+.token.class-name {
+	color: #b58900; /* yellow */
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #cb4b16; /* orange */
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
