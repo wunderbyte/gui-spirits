@@ -16,7 +16,7 @@ import { outputFile } from 'fs-extra';
 		.filter((node) => node.name !== 'src')
 		.filter((node) => node.isDirectory() || extname(node.name) === '.html')
 		.forEach((node) => rmSync(join(target, node.name), { recursive: true }));
-})('docs/public');
+})('docs');
 
 /**
  *
