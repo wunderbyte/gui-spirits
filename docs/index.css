@@ -1,10 +1,37 @@
 @font-face {
-	font-family: 'Cutive Mono';
-	font-style: normal;
-	font-weight: 400;
-	font-display: block;
-	src: url('https://fonts.gstatic.com/s/cutivemono/v9/m8JWjfRfY7WVjVi2E-K9H6RCTm4.woff2')
-		format('woff2');
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFQ.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJ.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdA.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexserif/v10/jizAREVNn1dOx-zrZ2X3pZvkTi2k_iI0q1s.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v7/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2) format('woff2');
 }
 @font-face {
 	font-family: 'Waiting for the Sunrise';
@@ -14,17 +41,11 @@
 	src: url('https://fonts.gstatic.com/s/waitingforthesunrise/v11/WBL1rFvOYl9CEv2i1mO6KUW8RKWJ2zoXoz5JsbZX_B4.woff2')
 		format('woff2');
 }
-@font-face {
-	font-family: 'Roboto Mono';
-	font-style: normal;
-	font-weight: 500;
-	font-display: block;
-	src: url('https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_7Pq_ROW4.woff2')
-		format('woff2');
-}
+
 
 :root {
 	--color-paper: hsl(52.5, 80%, 98%);
+	--color-paper: white;
 	--color-type: hsl(30, 50%, 3%);
 	--color-type-smear: hsla(30, 50%, 3%, 0.4);
 	--color-type-smear: #ba9c7d;
@@ -54,8 +75,7 @@ html {
 body {
 	background-color: var(--color-paper);
 	color: var(--color-type);
-	font-family: 'Cutive Mono', monospace;
-	letter-spacing: -1px;
+	font-family: 'IBM Plex Sans', sans-serif;
 	font-size: 1rem;
 	line-height: 1.5rem;
 	font-weight: 400;
@@ -91,39 +111,16 @@ ul li:before {
 	top: 0.15em;
 	left: 0;
 }
-/*
-h1 {
-  margin-bottom: min(3rem, 6vw);
-  font-weight: 600;
-  white-space: nowrap;
-  color: var(--color-bold);
-  text-shadow: 0 0 1px var(--color-bold-smear);
-}
-h1:after {
-  content: '-----------------------------';
-  display: block;
-  line-height: 1em;
-}
-*/
 h3 {
-	font-family: 'Roboto Mono', monospace;
-	font-weight: 500;
-	font-size: 0.8em;
-	letter-spacing: 1px;
-	margin: 2rem 0 1.5rem 0;
-	text-transform: uppercase;
-	text-shadow: 0 0 1px var(--color-bold-smear);
-	display: table;
-	background-color: var(--color-type);
-	color: white;
-	padding: 0 1.2em 0.1em 0.6em;
+	font-family: 'IBM Plex Serif', serif;
+	font-weight: 700;
+	font-size: 1.5em;
+	margin: 3rem 0 2rem 0;
 }
 p:last-of-type {
 	font-family: 'Waiting for the Sunrise', sans-serif;
 	font-weight: 400;
 	font-size: 1.7rem;
-	margin-top: 2.5em;
-	text-align: right;
 	padding-right: 6vw;
 	transform: rotate(-1.5deg);
 	transform-origin: right center;
@@ -132,21 +129,24 @@ p:last-of-type {
 	letter-spacing: 0;
 }
 a {
+	color: blue;
 	cursor: pointer;
 	text-decoration: underline;
 	text-underline-position: under;
-	text-decoration-thickness: 1px;
-	text-decoration-color: var(--color-type-smear);
+	text-decoration-thickness: 2px;
+	text-decoration-color: transparent;
 }
 a:hover {
-	background-color: var(--color-marker);
+	text-decoration-color: blue;
 }
 strong {
 	font-weight: 600;
 }
 em {
-	font-weight: 600;
-	font-style: normal;
+	font-style: italic;
+}
+code {
+	font-family: 'IBM Plex Mono', monospace;
 }
 picture,
 img {
@@ -223,10 +223,8 @@ pre[class*='language-'] {
 pre[class*='language-'] {
 	overflow: auto;
 	padding-left: 1em;
-	/*
-	font-size: 0.8em;
-	line-height: calc(1.5rem * 0.8);
-	*/
+	font-size: 0.85em;
+	line-height: calc(1.5rem * 0.85);
 	border-left: 1px solid #93a1a1 /* base1 */;
 }
 
