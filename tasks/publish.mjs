@@ -13,6 +13,7 @@ import { outputFile } from 'fs-extra';
  */
 (function cleanup(target) {
 	readdirSync(target, { withFileTypes: true })
+		.filter((node) => node.name !== 'src')
 		.filter((node) => node.isDirectory() || extname(node.name) === '.html')
 		.forEach((node) => rmSync(join(target, node.name), { recursive: true }));
 })('docs/public');
@@ -35,7 +36,7 @@ import { outputFile } from 'fs-extra';
 		.forEach((node) => {
 			recurse(join(source, node.name), join(target, node.name), level + 1);
 		});
-})('docs', 'docs/public');
+})('docs/src', 'docs');
 
 /**
  * @param {string} source
@@ -57,6 +58,11 @@ function publish(source, target, level) {
 			);
 }
 
+/**
+ * @param {string} markup 
+ * @param {number} level 
+ * @returns {string}
+ */
 function template(markup, level) {
 	const up = new Array(level).fill('../').join('');
 	return `
