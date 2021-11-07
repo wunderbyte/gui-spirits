@@ -59,8 +59,8 @@ function publish(source, target, level) {
 }
 
 /**
- * @param {string} markup 
- * @param {number} level 
+ * @param {string} markup
+ * @param {number} level
  * @returns {string}
  */
 function template(markup, level) {

@@ -1,65 +1,67 @@
 @font-face {
-  font-family: 'Cutive Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url('https://fonts.gstatic.com/s/cutivemono/v9/m8JWjfRfY7WVjVi2E-K9H6RCTm4.woff2') format('woff2');
+	font-family: 'Cutive Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: block;
+	src: url('https://fonts.gstatic.com/s/cutivemono/v9/m8JWjfRfY7WVjVi2E-K9H6RCTm4.woff2')
+		format('woff2');
 }
 @font-face {
-  font-family: 'Waiting for the Sunrise';
-  font-style: normal;
-  font-weight: 400;
-  font-display: block;
-  src: url('https://fonts.gstatic.com/s/waitingforthesunrise/v11/WBL1rFvOYl9CEv2i1mO6KUW8RKWJ2zoXoz5JsbZX_B4.woff2') format('woff2');
+	font-family: 'Waiting for the Sunrise';
+	font-style: normal;
+	font-weight: 400;
+	font-display: block;
+	src: url('https://fonts.gstatic.com/s/waitingforthesunrise/v11/WBL1rFvOYl9CEv2i1mO6KUW8RKWJ2zoXoz5JsbZX_B4.woff2')
+		format('woff2');
 }
 @font-face {
-  font-family: 'Roboto Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: block;
-  src: url('https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_7Pq_ROW4.woff2') format('woff2');
+	font-family: 'Roboto Mono';
+	font-style: normal;
+	font-weight: 500;
+	font-display: block;
+	src: url('https://fonts.gstatic.com/s/robotomono/v13/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_7Pq_ROW4.woff2')
+		format('woff2');
 }
-
 
 :root {
-  --color-paper: hsl(52.5,80%,98%);
-  --color-type: hsl(30,50%,3%);
-  --color-type-smear: hsla(30,50%,3%,0.4);
-  --color-type-smear: #ba9c7d;
-  --color-type-smear: #bda891;
-  --color-pen: hsl(225,45%,41%);
-  --color-pen-smear: hsla(225,45%,41%,0.25);
-  --color-bold: hsla(0,100%,32%,0.85);
-  --color-bold-smear: hsla(0,100%,32%,0.35);
-  --color-marker: hsla(60,98%,53%);
+	--color-paper: hsl(52.5, 80%, 98%);
+	--color-type: hsl(30, 50%, 3%);
+	--color-type-smear: hsla(30, 50%, 3%, 0.4);
+	--color-type-smear: #ba9c7d;
+	--color-type-smear: #bda891;
+	--color-pen: hsl(225, 45%, 41%);
+	--color-pen-smear: hsla(225, 45%, 41%, 0.25);
+	--color-bold: hsla(0, 100%, 32%, 0.85);
+	--color-bold-smear: hsla(0, 100%, 32%, 0.35);
+	--color-marker: hsla(60, 98%, 53%);
 }
 *:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
-  all: unset;
-  display: revert;
+	all: unset;
+	display: revert;
 }
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 *::selection {
 	background-color: var(--color-marker);
-  color: var(--color-type);
+	color: var(--color-type);
 }
 html {
 	font-size: clamp(16px, 1.3vw, 24px);
 }
 body {
-  background-color: var(--color-paper);
-  color: var(--color-type);
+	background-color: var(--color-paper);
+	color: var(--color-type);
 	font-family: 'Cutive Mono', monospace;
-  letter-spacing: -1px;
+	letter-spacing: -1px;
 	font-size: 1rem;
 	line-height: 1.5rem;
 	font-weight: 400;
 	hyphens: auto;
-  padding: 6vw;
-  padding-bottom: 9vw;
+	padding: 6vw;
+	padding-bottom: 9vw;
 }
 article {
 	max-width: 74ch;
@@ -67,26 +69,27 @@ article {
 }
 p,
 ol,
-ul, 
+ul,
 pre {
-  margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
-ol, ul {
-  list-style: none;
+ol,
+ul {
+	list-style: none;
 }
 ul li {
-  display: block;
-  padding-left: 1em;
-  position: relative;
+	display: block;
+	padding-left: 1em;
+	position: relative;
 }
 ul li:before {
-  content: '*';
-  color: var(--color-bold);
-  text-shadow: 0 0 1px var(--color-bold-smear);
-  vertical-align: bottom;
-  position: absolute;
-  top: 0.15em;
-  left: 0;
+	content: '*';
+	color: var(--color-bold);
+	text-shadow: 0 0 1px var(--color-bold-smear);
+	vertical-align: bottom;
+	position: absolute;
+	top: 0.15em;
+	left: 0;
 }
 /*
 h1 {
@@ -116,46 +119,46 @@ h3 {
 	padding: 0 1.2em 0.1em 0.6em;
 }
 p:last-of-type {
-  font-family: 'Waiting for the Sunrise', sans-serif;
-  font-weight: 400;
-  font-size: 1.7rem;
-  margin-top: 2.5em;
-  text-align: right;
-  padding-right: 6vw;
-  transform: rotate(-1.5deg);
-  transform-origin: right center;
-  color: var(--color-pen);
-  text-shadow: 0 0 2px var(--color-pen-smear);
-  letter-spacing: 0;
+	font-family: 'Waiting for the Sunrise', sans-serif;
+	font-weight: 400;
+	font-size: 1.7rem;
+	margin-top: 2.5em;
+	text-align: right;
+	padding-right: 6vw;
+	transform: rotate(-1.5deg);
+	transform-origin: right center;
+	color: var(--color-pen);
+	text-shadow: 0 0 2px var(--color-pen-smear);
+	letter-spacing: 0;
 }
 a {
-  cursor: pointer;
-  text-decoration: underline;
-  text-underline-position: under;
-  text-decoration-thickness: 1px;
-  text-decoration-color: var(--color-type-smear);
+	cursor: pointer;
+	text-decoration: underline;
+	text-underline-position: under;
+	text-decoration-thickness: 1px;
+	text-decoration-color: var(--color-type-smear);
 }
 a:hover {
-  background-color: var(--color-marker);
+	background-color: var(--color-marker);
 }
 strong {
-  font-weight: 600;
+	font-weight: 600;
 }
 em {
-  font-weight: 600;
-  font-style: normal;
+	font-weight: 600;
+	font-style: normal;
 }
 picture,
 img {
-  width: 100%;
-  display: block;
+	width: 100%;
+	display: block;
 }
 picture {
-  mix-blend-mode: multiply;
-  transform: scaleX(-1);
+	mix-blend-mode: multiply;
+	transform: scaleX(-1);
 }
 figure {
-  margin: 3em 0;
+	margin: 3em 0;
 }
 
 /* Breakpoints .............................................................. */
@@ -204,8 +207,8 @@ cyan      #2aa198
 green     #859900
 */
 
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
 	color: #657b83; /* base00 */
 	text-align: left;
 	white-space: pre;
@@ -217,7 +220,7 @@ pre[class*="language-"] {
 }
 
 /* Code blocks */
-pre[class*="language-"] {
+pre[class*='language-'] {
 	overflow: auto;
 	padding-left: 1em;
 	/*
@@ -227,16 +230,16 @@ pre[class*="language-"] {
 	border-left: 1px solid #93a1a1 /* base1 */;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
 	background-color: #fdf6e3; /* base3 */
 	background-color: transparent;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
+:not(pre) > code[class*='language-'] {
+	padding: 0.1em;
+	border-radius: 0.3em;
 }
 
 .token.comment,
@@ -251,7 +254,7 @@ pre[class*="language-"] {
 }
 
 .token.namespace {
-	opacity: .7;
+	opacity: 0.7;
 }
 
 .token.property,
