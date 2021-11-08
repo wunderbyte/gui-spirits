@@ -101,7 +101,7 @@ export function summon(possessor) {
 }
 ```
 
-Once the file is saved, make sure to import your enhanced `summon` function from the new location.
+Once the file is saved, make sure to import your enhanced function from the new location.
 
 ```js
 import { summon } from './my-spirits';
@@ -110,7 +110,7 @@ summon('my-component', (spirit) => {
 });
 ```
 
-You can study the [plugin authoring guide](LINK!) before you create your first plugin, but let's first see how plugins can be used in real code.
+You can study the [plugin authoring guide](#plugin-guide) before you create your first plugin, but let's first see how plugins can be used in real code.
 
 
 ## Destructuring
@@ -165,7 +165,7 @@ Whenenver you create a new function, consider passing the whole Spirit instead o
 
 ## Lifecycle
  
-Spirits never execute any code before the element is connected to page since this convention guarantees that the code can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when this happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* on the page.
+Spirits never execute any code before the element is connected to page since this convention guarantees that we can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when this happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
 
 
 ```js

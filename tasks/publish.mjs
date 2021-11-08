@@ -1,5 +1,6 @@
 import MarkdownIt from 'markdown-it';
 import prism from 'markdown-it-prism';
+import anchor from 'markdown-it-anchor';
 import { readdirSync, rmSync, promises } from 'fs';
 import { join, extname } from 'path';
 import { outputFile } from 'fs-extra';
@@ -48,7 +49,7 @@ function publish(source, target, level) {
 	const md = new MarkdownIt({
 		html: true,
 		xhtmlOut: true
-	}).use(prism);
+	}).use(prism).use(anchor);
 	return (node) =>
 		promises
 			.readFile(join(source, node.name))

@@ -25,7 +25,7 @@
     "@popeindustries/lit-html-server": "^3.1.0",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^6.3.0",
-    "es-dev-server": "^2.1.0",
+    "es-dev-server": "^1.14.2",
     "esbuild": "^0.13.8",
     "jasmine-browser-runner": "^0.9.0",
     "lerna": "^4.0.0",
