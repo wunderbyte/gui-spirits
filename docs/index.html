@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<title>TODO</title>
 		<meta charset="UTF-8"/>
@@ -9,25 +9,25 @@
 		<script type="module" src="index.js"></script>
 	</head>
 	<body>
-		<article><pre class="language-console"><code class="language-console"> ██████  ██    ██ ██     ███████ ██████  ██ ██████  ██ ████████ ███████ 
+		<article><pre class="language-js"><code class="language-js"> ██████  ██    ██ ██     ███████ ██████  ██ ██████  ██ ████████ ███████ 
 ██       ██    ██ ██     ██      ██   ██ ██ ██   ██ ██    ██    ██      
 ██   ███ ██    ██ ██     ███████ ██████  ██ ██████  ██    ██    ███████ 
 ██    ██ ██    ██ ██          ██ ██      ██ ██   ██ ██    ██         ██ 
  ██████   ██████  ██     ███████ ██      ██ ██   ██ ██    ██    ███████ 
 </code></pre>
-<p><strong>GUI Spirits</strong> is the simplest <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a> library you can imagine. It offers no new things you can do, but focuses instead on <em>how</em> you do it by providing an API based entirely on functions. Since no classes are involved, there is no <code>this</code> keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.</p>
-<h3>Installation</h3>
+<p><strong>GUI Spirits</strong> is a simple <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">web components</a> library. It offers no new things you can do, but focuses instead on <em>how</em> you do it by providing an API based entirely on functions. Since no classes are involved, there is no <code>this</code> keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.</p>
+<h2>Installation</h2>
 <p>This library is yet unpublished, so you'll need to copy the <code>src</code> folder into your project and boot it up with a <a href="https://blog.bitsrc.io/11-tools-to-build-a-monorepo-in-2021-7ce904821cc2">monorepo manager</a> since the folder contains multiple packages. Make sure to test in your oldest browser to see if you need Babel plugins or equivalent to support the syntax. There's an NPM script that can exports the files for you.</p>
 <pre class="language-console"><code class="language-console">npm run export ../myproject/mylibs/
 </code></pre>
-<h3>Components</h3>
+<h2>Components</h2>
 <p>The library exports a single function <code>summon</code> that will register a Custom Element with a <em>possessor function</em> to be invoked when the element is found in the DOM. The function recieves an object <code>spirit</code> with a property <code>element</code> that lets you handle the Custom Element.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@gui/spirits'</span><span class="token punctuation">;</span>
-<span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token function">possess</span><span class="token punctuation">(</span><span class="token parameter">spirit</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token function">onpossess</span><span class="token punctuation">(</span><span class="token parameter">spirit</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
   spirit<span class="token punctuation">.</span>element<span class="token punctuation">.</span>classList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'inserted'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>The element can expose methods and properties. Note that the component must be document-connected before this interface becomes available.</p>
+<p>The element can expose methods and properties. Note that the element must be document-connected before this interface becomes available.</p>
 <pre class="language-js"><code class="language-js"><span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> element <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> <span class="token punctuation">{</span>
     <span class="token function">toggle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -39,8 +39,8 @@
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>The Spirit also provides some basic <a href="#lifecycle">lifecycle hooks</a> and that's bascially all there is to it. You can enhance your workflow by collecting related functionality in a <em>plugin</em> and you might also want to take a look at some <a href="wiki">reference plugins</a>.</p>
-<h3>Plugins</h3>
+<p>The Spirit also provides some basic <a href="#lifecycle">lifecycle hooks</a> and that's bascially all there is to it. You can enhance your workflow by collecting related functionality in a <em>plugin</em> and you might also want to take a look at some <a href="plugins/">reference plugins</a>.</p>
+<h2>Plugins</h2>
 <p>Let's create a simple plugin to maintain CSS classnames.</p>
 <pre class="language-js"><code class="language-js"><span class="token comment">/**
  * @param {CustomElement} element
@@ -66,8 +66,8 @@
   <span class="token punctuation">[</span><span class="token string">'css'</span><span class="token punctuation">,</span> CSSPlugin<span class="token punctuation">]</span>
 <span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>This of course becomes tedious to set up whenever we create a new component, so we will assign our plugins once and for all and reexport the <code>summon</code> method with all the plugins baked in. Plugins are instantiated <a href="https://en.wikipedia.org/wiki/Lazy_initialization">lazily</a>, so we can register as many plugins as we like even if they are rarely used. Let's see how that works with some <a href="wiki">reference plugins</a>.</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token keyword">as</span> register <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@gui/spirits'</span><span class="token punctuation">;</span>
+<p>This of course becomes tedious to set up whenever we create a new component, so we will assign our plugins once and for all and re-export the <code>summon</code> method with all the plugins baked in. Plugins are instantiated <a href="https://en.wikipedia.org/wiki/Lazy_initialization">lazily</a>, so we can register as many plugins as we like even if they are rarely used. Let'stry that with some <a href="plugins/">reference plugins</a>.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token keyword">as</span> oldsummon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@gui/spirits'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> AttPlugin <span class="token keyword">from</span> <span class="token string">'@gui/plugin-att'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> CSSPlugin <span class="token keyword">from</span> <span class="token string">'@gui/plugin-css'</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> DOMPlugin <span class="token keyword">from</span> <span class="token string">'@gui/plugin-dom'</span><span class="token punctuation">;</span>
@@ -77,7 +77,7 @@
  * @param {Function} possessor
  */</span>
 <span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">summon</span><span class="token punctuation">(</span><span class="token parameter">possessor</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token function">register</span><span class="token punctuation">(</span>possessor<span class="token punctuation">,</span>  <span class="token punctuation">[</span>
+  <span class="token keyword">return</span> <span class="token function">oldsummon</span><span class="token punctuation">(</span>possessor<span class="token punctuation">,</span>  <span class="token punctuation">[</span>
     <span class="token punctuation">[</span><span class="token string">'att'</span><span class="token punctuation">,</span> AttPlugin<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// working with attributes</span>
     <span class="token punctuation">[</span><span class="token string">'css'</span><span class="token punctuation">,</span> CSSPlugin<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// working with classnames</span>
     <span class="token punctuation">[</span><span class="token string">'dom'</span><span class="token punctuation">,</span> DOMPlugin<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token comment">// working with the DOM</span>
@@ -86,13 +86,13 @@
 <span class="token punctuation">}</span>
 </code></pre>
 <p>Once the file is saved, make sure to import your enhanced <code>summon</code> function from the new location.</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./base-component'</span><span class="token punctuation">;</span>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./my-spirits'</span><span class="token punctuation">;</span>
 <span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">spirit</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
     spirit<span class="token punctuation">.</span>css<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">'inserted'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>You can study the <a href="LINK!">plugin authoring guide</a> before you create your first plugin, but let's first see how plugins can be used in real code.</p>
-<h3>Destructuring</h3>
+<h2>Destructuring</h2>
 <p>You can <a href="https://www.javascripttutorial.net/es6/javascript-object-destructuring/">destructure</a> the Spirit like any other object for a nice and compact syntax.</p>
 <pre class="language-js"><code class="language-js"><span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> possess<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -107,8 +107,8 @@
   event<span class="token punctuation">.</span><span class="token function">onclick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'Clicked!'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>As the code grows, you'll want to split this into multiple functions. To this purpose, the Spirit facilitates <em>recursive destructuring</em> via a property <code>spirit</code> that points to the Spirit itself.</p>
-<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./base-component'</span><span class="token punctuation">;</span>
+<p>As complexity grows, you'll want to split this into multiple functions. To this purpose, the Spirit facilitates <em>recursive destructuring</em> via a property <code>spirit</code> that points to the Spirit itself. Simply forward this property to destructure the Spirit forever.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./my-spirits'</span><span class="token punctuation">;</span>
 
 <span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> possess<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -133,27 +133,29 @@
 
 </code></pre>
 <p>Whenenver you create a new function, consider passing the whole Spirit instead of just a single plugin. This will let you keep all your plugins at hand when you need them later.</p>
-<h3>Lifecycle</h3>
-<p>We never execute any code before the element is attached to the DOM. This convention guarantees that the code can safely measure the elements dimensions or access the <code>parentNode</code> without running into <code>0</code> or <code>null</code>. This means that we don't need a special callback to detect when this happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets <em>moved around</em> in the DOM.</p>
+<h2>Lifecycle</h2>
+<p>Spirits never execute any code before the element is connected to page since this convention guarantees that the code can safely measure the elements dimensions or access the <code>parentNode</code> without running into <code>0</code> or <code>null</code>. This means that we don't need a special callback to detect when this happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets <em>moved around</em> on the page.</p>
 <pre class="language-js"><code class="language-js"><span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> ondetach<span class="token punctuation">,</span> onattach <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'first detected in the DOM'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">ondetach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'removed'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">onattach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'inserted again'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>These methods both return a function that you can invoke to cancel the callback.</p>
-<p>If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently <em>exorcised</em>. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happen and this is an an opportune moment to terminate whatever resource intensive operation the component may have scheduled.</p>
+<p>These methods both return a function to cancel the callback.</p>
+<p>If the element is removed from the document structure and not re-inserted more or less immediately, the spirit will be permanently <em>exorcised</em>. At this point, it stops working altogether and attempts to address the spirit's plugins, properties or methods will lead to errors. The spirit offers to execute a callback just before this happen.</p>
 <pre class="language-js"><code class="language-js"><span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span> onexorcise <span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
   <span class="token keyword">const</span> loop <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span>myupdate<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token function">onexorcise</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">clearInterval</span><span class="token punctuation">(</span>loop<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h3>Plugin guide</h3>
+<h2>Plugin guide</h2>
 <p>TODO: Write short guide. Remember <code>this</code> keyword to support destructuring. Remember <code>onexorcise</code> method (and support <code>ondetach</code> and <code>onattach</code>). Also a note on inter-plugin communication.</p>
-<h3>General guide</h3>
+<blockquote>
 <p>TODO: Short introduction to higher order functions.</p>
-<h3>Enterprise mode</h3>
-<p>TODO: Implement and document &quot;enterprise mode&quot; to obscure the occult terminology going on with spirits and possesion and what not.</p>
+</blockquote>
+<blockquote>
+<p>TODO: Also implement and document &quot;enterprise mode&quot; to obscure the occult terminology going on with spirits and possesion and what not.</p>
+</blockquote>
 </article>
 	</body>
 </html>

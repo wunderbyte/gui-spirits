@@ -45,7 +45,10 @@ import { outputFile } from 'fs-extra';
  * @returns {Function}
  */
 function publish(source, target, level) {
-	const md = new MarkdownIt().use(prism);
+	const md = new MarkdownIt({
+		html: true,
+		xhtmlOut: true
+	}).use(prism);
 	return (node) =>
 		promises
 			.readFile(join(source, node.name))
@@ -67,7 +70,7 @@ function template(markup, level) {
 	const up = new Array(level).fill('../').join('');
 	return `
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<title>TODO</title>
 		<meta charset="UTF-8"/>
