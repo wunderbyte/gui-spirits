@@ -37,7 +37,6 @@ function run(target, dirs) {
  */
 function traverse(target, dirs) {
 	Promise.all(dirs.map(namepair).map(copydir(target)))
-		.then(copyfile('README.md', target))
 		.then(copyfile('LICENSE', target))
 		.then(success(target, dirs))
 		.catch(console.error);
