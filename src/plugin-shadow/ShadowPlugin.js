@@ -37,12 +37,14 @@ function extras(shadow, plugin, sheets) {
 		/**
 		 * TODO: Support multiple.
 		 * TODO: Abandon sheet.
-		 * @param {CSSResult} sheet
+		 * @param {...CSSResult} sheet
 		 * @returns {this}
 		 */
-		adopt(sheet) {
-			adopt(shadow, sheet);
-			sheets.push(sheet);
+		adopt(...results) {
+			results.forEach((sheet) => {
+				adopt(shadow, sheet);
+				sheets.push(sheet);
+			});
 			return plugin;
 		},
 	};
