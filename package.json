@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "boot": "lerna bootstrap",
-    "prettier": "npm run prettier:js && prettier:css && npm run prettier:json",
+    "prettier": "npm run prettier:js && npm run prettier:css && npm run prettier:json",
     "prettier:js": "prettier --write '{src,spec,tasks,docs}/**/*.{js,mjs}' --ignore-path .prettierignore",
     "prettier:json": "prettier --write '{src,spec,tasks}/*/package.json' 'package.json'",
     "prettier:css": "prettier --write 'docs/index.css'",
