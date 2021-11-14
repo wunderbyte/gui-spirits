@@ -113,7 +113,7 @@ p,
 ol,
 ul,
 pre {
-	margin-bottom: 2rem;
+	margin-bottom: calc(var(--line-height) * 2);
 }
 ol,
 ul {
@@ -135,16 +135,18 @@ ul li:before {
 }
 h1 {
 	font-family: 'Bebas Neue', serif;
-	font-size: calc(var(--font-size) * 4);
-	line-height: calc(var(--line-height) * 3);
+	font-weight: 400;
+	font-size: calc(var(--font-size) * 5.5);
+	line-height: calc(var(--line-height) * 5.5);
 	margin: 0 0 calc(var(--line-height) * 3) 0;
+	text-indent: -0.03em;
 }
 h2 {
 	font-family: 'IBM Plex Sans Condensed', serif;
 	font-weight: 700;
 	font-size: calc(var(--font-size) * 1.4);
-	line-height: calc(var(--line-height) * 1.4);
-	margin: 0 0 calc(var(--line-height) * 1.5);
+	line-height: calc(var(--line-height) * 1.5);
+	margin: calc(var(--line-height) * 2) 0 calc(var(--line-height) * 1);
 }
 a {
 	color: royalblue;
@@ -191,14 +193,11 @@ blockquote {
 	font-weight: 400;
 	font-size: 1.7rem;
 	padding-right: 6vw;
-	transform: rotate(-1.5deg);
-	transform-origin: right center;
 	color: var(--color-pen);
 	text-shadow: 0 0 2px var(--color-pen-smear);
 	letter-spacing: 0;
 	hyphens: none;
 }
-
 #cover {
 	transition: opacity 0.125s linear;
 	background-color: var(--color-paper);
