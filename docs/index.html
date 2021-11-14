@@ -102,7 +102,7 @@
   event<span class="token punctuation">.</span><span class="token function">onclick</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'Clicked!'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>As complexity grows, you'll want to split this into multiple functions. To this purpose, the Spirit facilitates <em>recursive destructuring</em> via a property <code>spirit</code> that points to the Spirit itself. Simply forward this property to destructure the Spirit forever.</p>
+<p>As features get added, you will eventually want to split this into multiple functions. To this purpose, the Spirit facilitates <em>recursive destructuring</em> via a property <code>spirit</code> that points to the Spirit itself. Simply forward this property to destructure the Spirit forever.</p>
 <pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> summon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./my-spirits'</span><span class="token punctuation">;</span>
 
 <span class="token function">summon</span><span class="token punctuation">(</span><span class="token string">'my-component'</span><span class="token punctuation">,</span> possess<span class="token punctuation">)</span><span class="token punctuation">;</span>

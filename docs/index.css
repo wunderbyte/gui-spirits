@@ -103,7 +103,7 @@ body {
 	line-height: var(--line-height);
 	font-weight: 400;
 	hyphens: auto;
-	padding: 9vw 6vw;
+	padding: 0 6vw 9vw 6vw;
 }
 article {
 	max-width: 69ch;
@@ -138,13 +138,13 @@ h1 {
 	font-weight: 400;
 	font-size: calc(var(--font-size) * 5.5);
 	line-height: calc(var(--line-height) * 5.5);
-	margin: 0 0 calc(var(--line-height) * 3) 0;
+	margin: 6vw 0 4vw 0;
 	text-indent: -0.03em;
 }
 h2 {
 	font-family: 'IBM Plex Sans Condensed', serif;
 	font-weight: 700;
-	font-size: calc(var(--font-size) * 1.4);
+	font-size: calc(var(--font-size) * 1.5);
 	line-height: calc(var(--line-height) * 1.5);
 	margin: calc(var(--line-height) * 2) 0 calc(var(--line-height) * 1);
 }

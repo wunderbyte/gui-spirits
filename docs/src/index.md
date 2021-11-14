@@ -126,7 +126,8 @@ function possess({ att, css, dom, event }) {
 }
 ```
 
-As complexity grows, you'll want to split this into multiple functions. To this purpose, the Spirit facilitates *recursive destructuring* via a property `spirit` that points to the Spirit itself. Simply forward this property to destructure the Spirit forever.
+As features get added, you will eventually want to split this into multiple functions. To this purpose, the Spirit facilitates *recursive destructuring* via a property `spirit` that points to the Spirit itself. Simply forward this property to destructure the Spirit forever.
+
 
 ```js
 import { summon } from './my-spirits';
