@@ -48,8 +48,10 @@ import { outputFile } from 'fs-extra';
 function publish(source, target, level) {
 	const md = new MarkdownIt({
 		html: true,
-		xhtmlOut: true
-	}).use(prism).use(anchor);
+		xhtmlOut: true,
+	})
+		.use(prism)
+		.use(anchor);
 	return (node) =>
 		promises
 			.readFile(join(source, node.name))
@@ -82,6 +84,7 @@ function template(markup, level) {
 	</head>
 	<body>
 		<article>${markup}</article>
+		<div id="cover"></div>
 	</body>
 </html>
 `;

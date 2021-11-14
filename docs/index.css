@@ -1,44 +1,50 @@
 @font-face {
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFQ.woff2) format('woff2');
+	font-family: 'IBM Plex Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('https://fonts.gstatic.com/s/ibmplexsans/v9/zYXgKVElMYYaJe8bpLHnCwDKhdHeFQ.woff2')
+		format('woff2');
 }
 @font-face {
-  font-family: 'IBM Plex Sans';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJ.woff2) format('woff2');
+	font-family: 'IBM Plex Sans';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url('https://fonts.gstatic.com/s/ibmplexsans/v9/zYX-KVElMYYaJe8bpLHnCwDKhdTuF6ZJ.woff2')
+		format('woff2');
 }
 @font-face {
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ibmplexsans/v9/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdA.woff2) format('woff2');
+	font-family: 'IBM Plex Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('https://fonts.gstatic.com/s/ibmplexsans/v9/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdA.woff2')
+		format('woff2');
 }
 @font-face {
-  font-family: 'IBM Plex Serif';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ibmplexserif/v10/jizAREVNn1dOx-zrZ2X3pZvkTi2k_iI0q1s.woff2) format('woff2');
+	font-family: 'IBM Plex Serif';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('https://fonts.gstatic.com/s/ibmplexserif/v10/jizAREVNn1dOx-zrZ2X3pZvkTi2k_iI0q1s.woff2')
+		format('woff2');
 }
 @font-face {
-  font-family: 'IBM Plex Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ibmplexmono/v7/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2) format('woff2');
+	font-family: 'IBM Plex Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('https://fonts.gstatic.com/s/ibmplexmono/v7/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2')
+		format('woff2');
 }
 @font-face {
-  font-family: 'IBM Plex Sans Condensed';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/ibmplexsanscondensed/v8/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4S7bvspYY.woff2) format('woff2');
+	font-family: 'IBM Plex Sans Condensed';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('https://fonts.gstatic.com/s/ibmplexsanscondensed/v8/Gg8gN4UfRSqiPg7Jn2ZI12V4DCEwkj1E4LVeHY4S7bvspYY.woff2')
+		format('woff2');
 }
 @font-face {
 	font-family: 'Waiting for the Sunrise';
@@ -48,14 +54,18 @@
 	src: url('https://fonts.gstatic.com/s/waitingforthesunrise/v11/WBL1rFvOYl9CEv2i1mO6KUW8RKWJ2zoXoz5JsbZX_B4.woff2')
 		format('woff2');
 }
-
-
+@font-face {
+	font-family: 'Bebas Neue';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('https://fonts.gstatic.com/s/bebasneue/v2/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2')
+		format('woff2');
+}
 :root {
 	--color-paper: hsl(52.5, 80%, 98%);
 	--color-paper: white;
 	--color-type: hsl(30, 50%, 3%);
-	--color-type-smear: hsla(30, 50%, 3%, 0.4);
-	--color-type-smear: #ba9c7d;
 	--color-type-smear: #bda891;
 	--color-pen: hsl(225, 45%, 41%);
 	--color-pen-smear: hsla(225, 45%, 41%, 0.25);
@@ -63,7 +73,7 @@
 	--color-bold-smear: hsla(0, 100%, 32%, 0.35);
 	--color-marker: hsla(60, 98%, 53%);
 	--color-code: var(--color-type);
-	--color-code-background: #F6F6F6;
+	--color-code-background: #f6f6f6;
 	--font-size: 1rem;
 	--font-size-code: 0.9rem;
 	--line-height: 1.5rem;
@@ -93,8 +103,7 @@ body {
 	line-height: var(--line-height);
 	font-weight: 400;
 	hyphens: auto;
-	padding: 6vw;
-	padding-bottom: 9vw;
+	padding: 9vw 6vw;
 }
 article {
 	max-width: 69ch;
@@ -124,13 +133,18 @@ ul li:before {
 	top: 0.15em;
 	left: 0;
 }
-h1,
+h1 {
+	font-family: 'Bebas Neue', serif;
+	font-size: calc(var(--font-size) * 4);
+	line-height: calc(var(--line-height) * 3);
+	margin: 0 0 calc(var(--line-height) * 3) 0;
+}
 h2 {
 	font-family: 'IBM Plex Sans Condensed', serif;
 	font-weight: 700;
 	font-size: calc(var(--font-size) * 1.4);
 	line-height: calc(var(--line-height) * 1.4);
-	margin: calc(var(--line-height) * 1.5) 0 calc(var(--line-height) * 1.5 * 2 / 3) 0;
+	margin: 0 0 calc(var(--line-height) * 1.5);
 }
 a {
 	color: royalblue;
@@ -157,7 +171,7 @@ p code {
 	color: var(--color-code);
 	background-color: var(--color-code-background);
 	padding: 0 0.25em 0.1em 0.25em;
-	border: 1px solid rgba(0,0,0,0.1);
+	border: 1px solid rgba(0, 0, 0, 0.1);
 	font-size: var(--font-size-code);
 }
 picture,
@@ -185,19 +199,16 @@ blockquote {
 	hyphens: none;
 }
 
-/* Breakpoints .............................................................. */
-
-/*
-@media (min-width: 900px) {
-  article {
-    position: relative;
-    left: -7vw;
-  }
-  h1 {
-    text-indent: -0.6em;
-  }
+#cover {
+	transition: opacity 0.125s linear;
+	background-color: var(--color-paper);
+	pointer-events: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
-*/
 
 /* PrismJS 1.25.0
 https://prismjs.com/download.html#themes=prism-solarizedlight&languages=markup+css+clike+javascript */
@@ -251,7 +262,7 @@ pre[class*='language-'] {
 	background-color: var(--color-code-background);
 	border-radius: 3px;
 	padding: calc(1.5rem * 0.9);
-	border: 1px solid rgba(0,0,0,0.1);
+	border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .token.comment,
