@@ -1,7 +1,13 @@
+<!-- TODO: Github link goes here!
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12">
+  <path fill="currentColor" d="M6 0a6 6 0 110 12A6 6 0 016 0zm0 .98C3.243.98 1 3.223 1 6a5.02 5.02 0 003.437 4.77.594.594 0 00.045.005c.203.01.279-.129.279-.25l-.007-.854c-1.39.303-1.684-.674-1.684-.674-.227-.58-.555-.734-.555-.734-.454-.312.034-.306.034-.306.365.026.604.288.708.43l.058.088c.446.767 1.17.546 1.455.418.046-.325.174-.546.317-.672-1.11-.127-2.277-.558-2.277-2.482 0-.548.195-.996.515-1.348l-.03-.085c-.064-.203-.152-.658.079-1.244l.04-.007c.124-.016.548-.013 1.335.522A4.77 4.77 0 016 3.408c.425.002.853.058 1.252.17.955-.65 1.374-.516 1.374-.516.272.692.1 1.202.05 1.33.32.35.513.799.513 1.347 0 1.93-1.169 2.354-2.283 2.478.18.155.34.462.34.93l-.006 1.378c0 .13.085.282.323.245A5.02 5.02 0 0011 6C11 3.223 8.757.98 6 .98z"/>
+</svg>
+-->
+
 # GUI Spirits
 — A simple [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) library.
 
-**GUI Spirits** offers no new things you can do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there is no `this` keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.
+**GUI Spirits** offers no new things to do, but focuses instead on *how* you do it by providing an API based entirely on functions. Since no classes are involved, there is no `this` keyword to keep track of, no class hierarchy to maintain, no private or static methods, no decorators, just functions.
 
 ## Installation
 This library is yet unpublished, so you'll need to copy the `src` folder into your project and boot it up with a [monorepo manager](https://blog.bitsrc.io/11-tools-to-build-a-monorepo-in-2021-7ce904821cc2) since the folder contains multiple packages. Make sure to test in your oldest browser to see if you need Babel plugins or equivalent to support the syntax. There's an NPM script that can exports the files for you.
@@ -161,7 +167,7 @@ Whenenver you create a new function, consider passing the whole Spirit instead o
 
 ## Lifecycle
  
-Spirits never execute any code before the element is connected to page since this convention guarantees that we can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. This means that we don't need a special callback to detect when this happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
+Spirits never execute any code before the element is connected to page. This convention guarantees that we can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. But this means that we don't need a special callback to detect when insertion happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
 
 
 ```js
@@ -185,6 +191,6 @@ summon('my-component', ({ onexorcise }) => {
 ```
 
 ## Plugin guide
-TODO: Write short guide. Remember `this` keyword to support destructuring. Remember `onexorcise` method (and support `ondetach` and `onattach`). Also a note on inter-plugin communication. And somehing about higher order functions.
+TODO: Write short guide. Remember `this` keyword to support destructuring. Remember `onexorcise` method (and support `ondetach` and `onattach` in plugins). Also a note on inter-plugin communication and somehing about higher order functions.
 
 > TODO: Also implement and document "enterprise mode" to obscure the occult terminology going on with spirits and possesion and what not.
