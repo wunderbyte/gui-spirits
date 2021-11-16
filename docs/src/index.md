@@ -167,7 +167,7 @@ Whenenver you create a new function, consider passing the whole Spirit instead o
 
 ## Lifecycle
  
-Spirits never execute any code before the element is connected to page. This convention guarantees that we can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. But this means that we don't need a special callback to detect when insertion happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
+Spirits never execute any code before the element is connected to page. This convention guarantees that we can safely measure the elements dimensions or access the `parentNode` without running into `0` or `null`. But this also means that we don't need a special callback to detect when insertion happens, the possessor function does that for us. The spirit however offers two methods to detect whenever the element gets *moved around* in the DOM.
 
 
 ```js
