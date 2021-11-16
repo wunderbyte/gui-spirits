@@ -68,25 +68,37 @@ export default function CSSPlugin(elm) {
 		},
 
 		/**
+		 * Set multiple CSS variables.
+		 * @param {Map<string, string>} map 
+		 * @param {HTMLElement} target 
+		 */
+		setProperties(map, target = elm) {
+			map.forEach(([name, value]) => {
+				plugin.setProperty(name, value, target);
+			});
+			return plugin;
+		},
+
+		/**
 		 * Set CSS variable.
 		 * @param {string} name
 		 * @param {string} value
-		 * @param {Element} target
+		 * @param {HTMLElement} target
 		 * @returns {this}
 		 */
-		setProperty(name, value, target) {
-			(target ? target.style : elm.style).setProperty(name, value);
+		setProperty(name, value, target = elm) {
+			target.style.setProperty(name, String(value));
 			return plugin;
 		},
 
 		/**
 		 * Get CSS variable.
 		 * @param {string} name
-		 * @param {Element} target
+		 * @param {HTMLElement} target
 		 * @returns {this}
 		 */
-		getProperty(name, target) {
-			return getComputedStyle(target || elm).getPropertyValue(name);
+		getProperty(name, target = elm) {
+			return getComputedStyle(target).getPropertyValue(name);
 		},
 
 		/**
@@ -101,7 +113,7 @@ export default function CSSPlugin(elm) {
 
 		/**
 		 * Use this API to work with classes for arbitrary element.
-		 * @param {Element} newelm
+		 * @param {HTMLElement} newelm
 		 * @returns {this}
 		 */
 		wrap(newelm) {
