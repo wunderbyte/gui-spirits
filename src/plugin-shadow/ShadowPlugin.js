@@ -1,4 +1,4 @@
-import { common, render, html } from '@gui/plugin-dom';
+import { common, render, html, unsafe } from '@gui/plugin-dom';
 export { css } from 'lit-css';
 
 /**
@@ -14,7 +14,7 @@ export default function ShadowPlugin(elm) {
 	const sheets = [];
 	const parser = (template) => html`
 		<style>
-			${shadow.adoptedStyleSheets ? '' : sheets.join('')}
+			${shadow.adoptedStyleSheets ? null : unsafe(sheets.join(''))}
 		</style>
 		${template}
 	`;
