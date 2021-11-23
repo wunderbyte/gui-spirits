@@ -15,11 +15,7 @@
     "export": "node --unhandled-rejections=strict tasks/export.mjs",
     "test": "npm run boot && concurrently \"npm run test:build\" \"npm run test:serve\"",
     "test:build": "esbuild spec/input.js --format=esm --target=chrome93,firefox93,safari15 --bundle --watch --outfile=spec/output.mjs",
-    "test:serve": "npx jasmine-browser-runner serve",
-    "docs": "npm run boot && concurrently \"npm run docs:build\" \"npm run docs:serve\" \"npm run docs:watch\"",
-    "docs:build": "node --unhandled-rejections=strict tasks/publish.mjs",
-    "docs:serve": "es-dev-server --root-dir docs --watch --open",
-    "docs:watch": "chokidar 'docs/src/**/*.md' 'docs/index.js' 'docs/index.css' -c 'npm run docs:build'"
+    "test:serve": "npx jasmine-browser-runner serve"
   },
   "devDependencies": {
     "@popeindustries/lit-html-server": "^3.1.0",
