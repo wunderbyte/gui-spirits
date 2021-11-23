@@ -69,8 +69,8 @@ export default function CSSPlugin(elm) {
 
 		/**
 		 * Set multiple CSS variables.
-		 * @param {Map<string, string>} map 
-		 * @param {HTMLElement} target 
+		 * @param {Map<string, string>} map
+		 * @param {HTMLElement} target
 		 */
 		setProperties(map, target = elm) {
 			map.forEach(([name, value]) => {
