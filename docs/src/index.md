@@ -1,5 +1,5 @@
 ---
-title: ShadowPlugin — GUI Spirits
+title: GUI Spirits
 class: index
 ---
 
